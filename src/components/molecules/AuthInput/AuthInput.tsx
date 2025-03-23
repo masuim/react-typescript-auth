@@ -6,15 +6,17 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "../../atoms/Button/Button";
 import type { UseFormRegister } from "react-hook-form";
 import { usePasswordVisibility } from "../../../hooks/usePasswordVisibility";
-import type { AuthenticationFormBase } from "../../../types";
+import type { LoginFormData, RegisterFormData } from "../../../types";
+
+type FormData = LoginFormData & Partial<RegisterFormData>;
 
 export interface AuthInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
   label: string;
-  name: keyof AuthenticationFormBase;
+  name: keyof FormData;
   error?: string;
   required?: boolean;
-  register?: UseFormRegister<AuthenticationFormBase>;
+  register?: UseFormRegister<FormData>;
 }
 
 export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(

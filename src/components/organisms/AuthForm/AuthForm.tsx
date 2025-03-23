@@ -1,13 +1,15 @@
 import { AuthInput } from "../../molecules/AuthInput/AuthInput";
 import { SubmitButton } from "../../molecules/SubmitButton/SubmitButton";
-import type { AuthenticationFormBase } from "src/types";
+import type { LoginFormData, RegisterFormData } from "src/types";
 import type { UseFormRegister, FieldErrors } from "react-hook-form";
+
+type FormData = LoginFormData & Partial<RegisterFormData>;
 
 interface AuthFormProps {
   type: "login" | "register";
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  register: UseFormRegister<AuthenticationFormBase>;
-  errors: FieldErrors<AuthenticationFormBase>;
+  register: UseFormRegister<FormData>;
+  errors: FieldErrors<FormData>;
 }
 
 export const AuthForm: React.FC<AuthFormProps> = ({
@@ -34,6 +36,16 @@ export const AuthForm: React.FC<AuthFormProps> = ({
         register={register}
         error={errors.password?.message}
       />
+      {type === "register" && (
+        <AuthInput
+          label="パスワード（確認）"
+          type="password"
+          name="confirmPassword"
+          required
+          register={register}
+          error={errors.confirmPassword?.message}
+        />
+      )}
       <SubmitButton>{type === "login" ? "ログイン" : "登録"}</SubmitButton>
     </form>
   );
