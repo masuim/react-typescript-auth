@@ -2,17 +2,13 @@ import React from "react";
 import { AuthInput } from "../../molecules/AuthInput/AuthInput";
 import { SubmitButton } from "../../molecules/SubmitButton/SubmitButton";
 import type { UseFormRegister, FieldErrors } from "react-hook-form";
-
-interface AuthFormData {
-  email: string;
-  password: string;
-}
+import type { AuthenticationFormBase } from "../../../types";
 
 interface AuthFormProps {
   type: "login" | "register";
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  register: UseFormRegister<AuthFormData>;
-  errors: FieldErrors<AuthFormData>;
+  register: UseFormRegister<AuthenticationFormBase>;
+  errors: FieldErrors<AuthenticationFormBase>;
   isLoading?: boolean;
 }
 

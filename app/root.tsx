@@ -6,7 +6,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
 import type { Route } from "./+types/root";
 import "./app.css";
 
@@ -32,8 +31,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen bg-gray-50">
-        {children}
+      <body className="bg-white dark:bg-gray-950">
+        <div className="min-h-screen bg-gray-50">{children}</div>
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -42,11 +42,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return (
-    <div className="min-h-screen">
-      <Outlet />
-    </div>
-  );
+  return <Outlet />;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
