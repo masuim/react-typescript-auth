@@ -6,21 +6,17 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "../../atoms/Button/Button";
 import type { UseFormRegister } from "react-hook-form";
 import { usePasswordVisibility } from "../../../hooks/usePasswordVisibility";
-import {
-  INPUT_ERROR_STYLES,
-  INPUT_PASSWORD_STYLES,
-  ERROR_MESSAGE_STYLES,
-  REQUIRED_MARK_STYLES,
-} from "../../../styles";
-import type { AuthenticationFormBase } from "../../../types";
+import type { LoginFormData, RegisterFormData } from "../../../types";
+
+type FormData = LoginFormData & Partial<RegisterFormData>;
 
 export interface AuthInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
   label: string;
-  name: keyof AuthenticationFormBase;
+  name: keyof FormData;
   error?: string;
   required?: boolean;
-  register?: UseFormRegister<AuthenticationFormBase>;
+  register?: UseFormRegister<FormData>;
 }
 
 export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
@@ -31,44 +27,70 @@ export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
     const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
     const isPassword = type === "password";
 
+    const inputType = isPassword && showPassword ? "text" : type;
+    const inputClassName = cn(
+      error && "border-destructive",
+      isPassword && STYLES.passwordInput,
+      className
+    );
+
     return (
-      <div className="space-y-2">
+      <div className={STYLES.container}>
         <Label htmlFor={name}>
           {label}
-          {required && <span className={REQUIRED_MARK_STYLES}>*</span>}
+          {required && <span className="text-destructive">*</span>}
         </Label>
+
         <div className="relative">
           <Input
-            type={isPassword && showPassword ? "text" : type}
-            className={cn(
-              error && INPUT_ERROR_STYLES,
-              isPassword && INPUT_PASSWORD_STYLES,
-              className
-            )}
+            type={inputType}
+            className={inputClassName}
             {...(register ? register(name) : { ref })}
             {...props}
           />
           {isPassword && (
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-              onClick={togglePasswordVisibility}
-              aria-label={
-                showPassword ? "パスワードを非表示" : "パスワードを表示"
-              }
-            >
-              {showPassword ? (
-                <EyeOff className="h-4 w-4 text-gray-500" />
-              ) : (
-                <Eye className="h-4 w-4 text-gray-500" />
-              )}
-            </Button>
+            <PasswordToggleButton
+              showPassword={showPassword}
+              onToggle={togglePasswordVisibility}
+            />
           )}
         </div>
-        {error && <p className={ERROR_MESSAGE_STYLES}>{error}</p>}
+        {error && <p className={STYLES.error}>{error}</p>}
       </div>
     );
   }
 );
+
+interface PasswordToggleButtonProps {
+  showPassword: boolean;
+  onToggle: () => void;
+}
+
+const PasswordToggleButton: React.FC<PasswordToggleButtonProps> = ({
+  showPassword,
+  onToggle,
+}) => (
+  <Button
+    type="button"
+    variant="ghost"
+    size="icon"
+    className={STYLES.passwordButton}
+    onClick={onToggle}
+    aria-label={showPassword ? "パスワードを非表示" : "パスワードを表示"}
+  >
+    {showPassword ? (
+      <EyeOff className={STYLES.icon} />
+    ) : (
+      <Eye className={STYLES.icon} />
+    )}
+  </Button>
+);
+
+const STYLES = {
+  container: "flex flex-col gap-2",
+  error: "text-sm text-destructive",
+  passwordInput: "pr-10",
+  passwordButton:
+    "absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent",
+  icon: "h-4 w-4 text-gray-500",
+} as const;

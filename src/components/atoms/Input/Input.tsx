@@ -1,6 +1,5 @@
 import * as React from "react";
 import { cn } from "../../../lib/utils";
-import { INPUT_BASE_STYLES } from "../../../styles";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -15,7 +14,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className="relative">
         <input
           type={type}
-          className={cn(INPUT_BASE_STYLES, className)}
+          className={cn(
+            inputStyles.base,
+            inputStyles.shadow,
+            inputStyles.focus,
+            error && inputStyles.error,
+            className
+          )}
           ref={ref}
           aria-invalid={!!error}
           aria-describedby={error ? `${inputId}-error` : undefined}
@@ -34,3 +39,12 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
   }
 );
+
+const inputStyles = {
+  base: "w-full rounded-md border-[1.5px] border-gray-400 px-3 py-2",
+  shadow: "shadow-[0_2px_4px_0_rgba(0,0,0,0.05)]",
+  focus:
+    "focus:border-primary focus:outline-none focus:ring-[3px] focus:ring-primary/20 focus:border-[1.5px]",
+  error:
+    "border-destructive focus:border-destructive focus:ring-destructive/20",
+} as const;
