@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@react-router/dev": "^7.4.0",
-    "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4.0.15",
     "@tailwindcss/vite": "^4.0.15",
     "@types/node": "^20",
