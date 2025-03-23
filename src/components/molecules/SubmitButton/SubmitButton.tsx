@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Button } from "../../atoms/Button/Button";
+import type { ButtonProps } from "../../atoms/Button/Button";
 import { Loader2 } from "lucide-react";
 import { cn } from "../../../lib/utils";
-export interface SubmitButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+import { theme } from "../../../config/theme";
+
+export interface SubmitButtonProps extends Omit<ButtonProps, "asChild"> {
   isLoading?: boolean;
   loadingText?: string;
 }
@@ -20,6 +22,7 @@ export const SubmitButton = React.forwardRef<
       isLoading = false,
       loadingText,
       type = "submit",
+      variant = theme.button.primary,
       ...props
     },
     ref
@@ -30,6 +33,7 @@ export const SubmitButton = React.forwardRef<
       <Button
         ref={ref}
         type={type}
+        variant={variant}
         className={cn("w-full", className)}
         disabled={disabled || isLoading}
         {...props}

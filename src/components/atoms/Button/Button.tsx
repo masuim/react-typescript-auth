@@ -51,7 +51,7 @@ const buttonStyles = {
   },
 } as const;
 
-const buttonVariants = cva(
+export const buttonVariants = cva(
   [
     buttonStyles.layout,
     buttonStyles.appearance,

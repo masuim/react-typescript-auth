@@ -1,4 +1,7 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import { cn } from "src/lib/utils";
+import { buttonVariants } from "src/components/atoms/Button/Button";
+import { theme } from "src/config/theme";
 
 export default function Index() {
   return (
@@ -13,7 +16,7 @@ export default function Index() {
         <div className="flex justify-center gap-4">
           <Link
             to="/login"
-            className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+            className={cn(buttonVariants({ variant: theme.button.primary }))}
           >
             ログイン
           </Link>
