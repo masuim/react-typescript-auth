@@ -13,14 +13,12 @@ export default function Index() {
         <p className="text-lg mb-8 text-gray-600 dark:text-gray-300">
           認証機能を備えた再利用可能なReactテンプレート
         </p>
-        <div className="flex justify-center gap-4">
-          <Link
-            to="/login"
-            className={cn(buttonVariants({ variant: theme.button.primary }))}
-          >
-            ログイン
-          </Link>
-        </div>
+        <Link
+          to="/login"
+          className={cn(buttonVariants({ variant: theme.button.primary }))}
+        >
+          ログイン
+        </Link>
       </div>
     </div>
   );
