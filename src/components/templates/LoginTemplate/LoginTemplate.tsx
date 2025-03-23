@@ -23,10 +23,10 @@ export const LoginTemplate: React.FC<LoginTemplateProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-[480px] w-[360px] rounded-lg shadow bg-white">
-      <div className="flex flex-col items-center justify-center mb-8 h-[160px] gap-4">
-        <h1 className="text-4xl font-extrabold text-slate-800">{title}</h1>
-        {subtitle && <p className="text-slate-600 text-xs">{subtitle}</p>}
+    <div className="flex flex-col items-center h-[380px] w-[360px] rounded-lg shadow bg-white pt-8 pb-6 px-6">
+      <div className="flex flex-col items-center mb-6 gap-3">
+        <h1 className="text-2xl font-bold text-slate-800">{title}</h1>
+        <p className="text-slate-500 text-sm">{subtitle}</p>
       </div>
       <AuthForm
         type="login"

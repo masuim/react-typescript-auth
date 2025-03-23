@@ -87,7 +87,7 @@ const PasswordToggleButton: React.FC<PasswordToggleButtonProps> = ({
 );
 
 const STYLES = {
-  container: "flex flex-col gap-4",
+  container: "flex flex-col gap-2",
   error: "text-sm text-destructive",
   passwordInput: "pr-10",
   passwordButton:

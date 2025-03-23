@@ -19,7 +19,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   errors,
 }) => {
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-8 w-[320px]">
+    <form onSubmit={onSubmit} className="flex flex-col gap-8 w-full">
       <AuthInput
         label="メールアドレス"
         type="email"
