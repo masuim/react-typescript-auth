@@ -20,14 +20,6 @@ export default function Index() {
           >
             ログイン
           </Link>
-          <a
-            href="https://github.com/yourusername/react-typescript-auth"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-          >
-            GitHub
-          </a>
         </div>
       </div>
     </div>
