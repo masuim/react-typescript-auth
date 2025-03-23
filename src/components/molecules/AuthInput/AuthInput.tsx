@@ -6,12 +6,6 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "../../atoms/Button/Button";
 import type { UseFormRegister } from "react-hook-form";
 import { usePasswordVisibility } from "../../../hooks/usePasswordVisibility";
-import {
-  INPUT_ERROR_STYLES,
-  INPUT_PASSWORD_STYLES,
-  ERROR_MESSAGE_STYLES,
-  REQUIRED_MARK_STYLES,
-} from "../../../styles";
 import type { AuthenticationFormBase } from "../../../types";
 
 export interface AuthInputProps
@@ -32,17 +26,18 @@ export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
     const isPassword = type === "password";
 
     return (
-      <div className="space-y-2">
+      <div className="flex flex-col gap-4">
         <Label htmlFor={name}>
           {label}
-          {required && <span className={REQUIRED_MARK_STYLES}>*</span>}
+          {required && <span className="text-destructive">*</span>}
         </Label>
+
         <div className="relative">
           <Input
             type={isPassword && showPassword ? "text" : type}
             className={cn(
-              error && INPUT_ERROR_STYLES,
-              isPassword && INPUT_PASSWORD_STYLES,
+              error && "border-destructive",
+              isPassword && "pr-10",
               className
             )}
             {...(register ? register(name) : { ref })}
@@ -67,7 +62,7 @@ export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
             </Button>
           )}
         </div>
-        {error && <p className={ERROR_MESSAGE_STYLES}>{error}</p>}
+        {error && <p className="text-sm text-destructive">{error}</p>}
       </div>
     );
   }

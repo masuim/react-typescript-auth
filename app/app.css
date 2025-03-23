@@ -1,13 +1,22 @@
-@import "tailwindcss/preflight";
 @import "tailwindcss";
 
-:root {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
+/* MEMO: @theme に対して"Unknown at rule @themepostcss(unknownAtRules)"メッセージが出ていますが、
+   スタイルは問題なく効いているためこのままとしています */
+@theme {
+  --color-primary: #2563eb;
+  --color-primary-foreground: #ffffff;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
+  --color-secondary: #4b5563;
+  --color-secondary-foreground: #ffffff;
+  --color-accent: #f3f4f6;
+  --color-accent-foreground: #111827;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-  }
+  /* フォームの設定 */
+  --form-input-bg: white;
+  --form-input-border-color: rgb(209 213 219);
+  --form-input-border-width: 2px;
+  --form-input-border-radius: 0.375rem;
+  --form-input-padding: 0.5rem 0.75rem;
+  --form-input-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
