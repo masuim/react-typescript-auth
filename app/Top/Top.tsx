@@ -1,4 +1,4 @@
-import { LoginTemplate } from "src/components/templates/LoginTemplate";
+import { LoginTemplate } from "src/components/templates/LoginTemplate/LoginTemplate";
 
 export function Top() {
   return (
