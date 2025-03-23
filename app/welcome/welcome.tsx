@@ -14,20 +14,15 @@ export function Welcome() {
   };
 
   return (
-    <main className="flex items-center justify-center pt-16 pb-4">
-      <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
-        <header className="flex flex-col items-center gap-9">
-          <h1>React Router Header</h1>
-        </header>
-        <div className="w-full space-y-6 px-4">
-          <AuthForm
-            type="login"
-            onSubmit={handleSubmit(onSubmit)}
-            register={register}
-            errors={errors}
-          />
-        </div>
-      </div>
+    <main className="min-h-screen flex items-center justify-center">
+      <AuthForm
+        type="login"
+        onSubmit={handleSubmit(onSubmit)}
+        register={register}
+        errors={errors}
+        title="ログイン"
+        className="w-full max-w-md px-4 sm:px-6 lg:px-8"
+      />
     </main>
   );
 }
