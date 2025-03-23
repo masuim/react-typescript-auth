@@ -8,29 +8,27 @@ export interface SubmitButtonProps
   children: React.ReactNode;
 }
 
-const SubmitButton = React.forwardRef<HTMLButtonElement, SubmitButtonProps>(
-  ({ className, loading, children, disabled, ...props }, ref) => {
-    return (
-      <Button
-        ref={ref}
-        type="submit"
-        disabled={loading || disabled}
-        className={cn("w-full", className)}
-        {...props}
-      >
-        {loading ? (
-          <div className="flex items-center gap-2">
-            <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-            <span>送信中...</span>
-          </div>
-        ) : (
-          children
-        )}
-      </Button>
-    );
-  }
-);
-
-SubmitButton.displayName = "SubmitButton";
-
-export { SubmitButton };
+export const SubmitButton = React.forwardRef<
+  HTMLButtonElement,
+  SubmitButtonProps
+>(({ className, loading, children, disabled, ...props }, ref) => {
+  return (
+    <Button
+      ref={ref}
+      type="submit"
+      variant="default"
+      disabled={loading || disabled}
+      className={cn("w-full", className)}
+      {...props}
+    >
+      {loading ? (
+        <div className="flex items-center gap-2">
+          <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+          <span>送信中...</span>
+        </div>
+      ) : (
+        children
+      )}
+    </Button>
+  );
+});
