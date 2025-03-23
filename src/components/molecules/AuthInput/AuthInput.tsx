@@ -4,34 +4,41 @@ import { Label } from "../../atoms/Label/Label";
 import { cn } from "../../../lib/utils";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "../../atoms/Button/Button";
+import type { UseFormRegister } from "react-hook-form";
 
 export interface AuthInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
   label: string;
+  name: string;
   error?: string;
   required?: boolean;
+  // TODO: 型をつける
+  register?: UseFormRegister<any>;
 }
 
-const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
-  ({ className, label, error, required, type, ...props }, ref) => {
+export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
+  (
+    { className, label, error, required, type, name, register, ...props },
+    ref
+  ) => {
     const [showPassword, setShowPassword] = React.useState(false);
     const isPassword = type === "password";
 
     return (
       <div className="space-y-2">
-        <Label htmlFor={props.id || props.name}>
+        <Label htmlFor={name}>
           {label}
           {required && <span className="text-destructive ml-1">*</span>}
         </Label>
         <div className="relative">
           <Input
-            ref={ref}
             type={isPassword && showPassword ? "text" : type}
             className={cn(
               error && "border-destructive focus-visible:ring-destructive",
               isPassword && "pr-10",
               className
             )}
+            {...(register ? register(name) : { ref })}
             {...props}
           />
           {isPassword && (
@@ -57,5 +64,3 @@ const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
 );
 
 AuthInput.displayName = "AuthInput";
-
-export { AuthInput };
