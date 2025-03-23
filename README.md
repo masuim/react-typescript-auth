@@ -5,7 +5,7 @@
 ## 技術スタック
 
 - React 19
-- TypeScript
+- TypeScript V5
 - Tailwind CSS v4
 - React Router v ７
 - Zod
@@ -15,7 +15,7 @@
 
 # アーキテクチャ
 
-** Atomic Design **
+### Atomic Design
 
 - atoms: 最小単位のコンポーネント（Button, Input, Label など）
 - molecules: 複数の atoms で構成（AuthInput, SubmitButton など）
@@ -44,7 +44,7 @@ src/
 
 # 機能概要
 
-** 認証機能 **
+### 認証機能
 
 - ログインページ
   - Zod によるフォームバリデーション
@@ -56,7 +56,7 @@ src/
   - ユーザー情報の表示
   - ログアウト機能
 
-** 状態管理 **
+### 状態管理
 
 - ローカルステート: React useState
 - コンテキスト: React Context API
@@ -79,9 +79,9 @@ src/
 
 # 初期実行コマンド
 
+```
 % npx create-react-router@latest
 
-```
 Need to install the following packages:
 create-react-router@7.4.0
 Ok to proceed? (y) y
@@ -112,9 +112,11 @@ npm WARN deprecated glob@7.2.3: Glob versions prior to v9 are no longer supporte
          Join the community at https://rmx.as/discord
 ```
 
+```
 % cd [プロジェクト名]
 
 % npm i
 
 % npm run dev
-Local: http://localhost:5173/
+  - Local: http://localhost:5173/
+```
