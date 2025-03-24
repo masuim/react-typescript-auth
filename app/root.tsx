@@ -5,10 +5,12 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "react-router";
 import type { Route } from "./+types/root";
 import { Heading, Text } from "../src/components/atoms/Typography";
 import { InternalLink } from "../src/components/atoms/LinkAndButton";
+import { PageLayout } from "../src/components/templates/PageLayout";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -33,10 +35,21 @@ export default function Root() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 antialiased">
+      <body
+        className={`h-full bg-page-bg dark:bg-page-bg-dark text-gray-900 dark:text-gray-100 antialiased "
+        }`}
+      >
         <div className="min-h-screen flex flex-col">
           <main className="flex-grow">
-            <Outlet />
+            <PageLayout
+              centered={true}
+              maxWidth="lg"
+              className="py-8"
+              cardClassName="shadow-none"
+              cardPadding="p-0"
+            >
+              <Outlet />
+            </PageLayout>
           </main>
         </div>
         <ScrollRestoration />
@@ -61,7 +74,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-gray-50 dark:bg-gray-900">
+      <body className="h-full bg-page-bg dark:bg-page-bg-dark">
         <div className="min-h-screen flex items-center justify-center px-4 py-16 sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8">
           <div className="max-w-max mx-auto text-center">
             <main>
