@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { AuthForm } from "src/components/organisms/AuthForm/AuthForm";
 import type { AuthenticationFormBase } from "src/types/forms/authentication-forms";
