@@ -1,5 +1,5 @@
 import { Link, type LinkProps } from "react-router-dom";
-import { cn } from "../../../lib/utils";
+import { cn } from "src/lib/utils";
 import { buttonVariants } from "../Button/Button";
 import { forwardRef } from "react";
 

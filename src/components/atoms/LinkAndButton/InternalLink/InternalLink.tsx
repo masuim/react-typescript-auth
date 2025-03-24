@@ -1,6 +1,6 @@
 import { Link, type LinkProps } from "react-router-dom";
-import { cn } from "../../../lib/utils";
-import { theme } from "../../../config/theme";
+import { cn } from "../../../../lib/utils";
+import { theme } from "../../../../config/theme";
 import { forwardRef } from "react";
 
 type LinkVariant = keyof typeof theme.typography.link;

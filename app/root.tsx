@@ -7,6 +7,8 @@ import {
   ScrollRestoration,
 } from "react-router";
 import type { Route } from "./+types/root";
+import { Heading, Text } from "../src/components/atoms/Typography";
+import { InternalLink } from "../src/components/atoms/LinkAndButton";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -64,17 +66,23 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
           <div className="max-w-max mx-auto text-center">
             <main>
               <div className="sm:flex items-center justify-center">
-                <p className="text-4xl font-extrabold text-indigo-600 dark:text-indigo-400 sm:text-5xl">
+                <Text
+                  variant="large"
+                  className="text-indigo-600 dark:text-indigo-400 sm:text-5xl font-extrabold"
+                >
                   {isRouteErrorResponse(error) ? error.status : "Error"}
-                </p>
+                </Text>
                 <div className="sm:ml-6">
                   <div className="sm:border-l sm:border-gray-200 sm:pl-6">
-                    <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+                    <Heading
+                      level="h1"
+                      className="text-gray-900 dark:text-gray-100"
+                    >
                       {errorMessage}
-                    </h1>
-                    <p className="mt-3 text-base text-gray-500 dark:text-gray-400">
+                    </Heading>
+                    <Text variant="subtle" className="mt-3">
                       ページを更新するか、ホームに戻ってお試しください。
-                    </p>
+                    </Text>
                   </div>
                   <div className="mt-6 flex justify-center space-x-3 sm:border-l sm:border-transparent sm:pl-6">
                     <button
@@ -83,12 +91,13 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
                     >
                       更新する
                     </button>
-                    <a
-                      href="/"
-                      className="inline-flex items-center rounded-md border border-transparent bg-indigo-100 dark:bg-indigo-900 px-4 py-2 text-sm font-medium text-indigo-700 dark:text-indigo-200 hover:bg-indigo-200 dark:hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    <InternalLink
+                      to="/"
+                      variant="button"
+                      className="bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200 hover:bg-indigo-200 dark:hover:bg-indigo-800"
                     >
                       ホームに戻る
-                    </a>
+                    </InternalLink>
                   </div>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { AuthForm } from "src/components/organisms/AuthForm/AuthForm";
 import type { AuthenticationFormBase } from "src/types/forms/authentication-forms";
-import { Heading } from "src/components/atoms/Heading.tsx/Heading";
+import { Heading } from "src/components/atoms/Typography/Heading";
 import { Text } from "src/components/atoms/Typography/Text";
 
 interface LoginTemplateProps {
