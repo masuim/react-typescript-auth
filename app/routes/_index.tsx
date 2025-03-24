@@ -1,6 +1,6 @@
 import { Heading } from "src/components/atoms/Heading.tsx/Heading";
 import { Text } from "src/components/atoms/Typography/Text";
-import { InternalLinkButton } from "src/components/atoms/InternalLinkButton.tsx/InternalLinkButton";
+import { InternalLinkButton } from "src/components/atoms/InternalLinkButton/InternalLinkButton";
 
 export default function Index() {
   return (
