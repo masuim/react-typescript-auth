@@ -1,3 +1,20 @@
+/**
+ * フォーム送信用の拡張ボタンコンポーネント（Atomic Design: Molecules）
+ *
+ * 基本的なButtonコンポーネントを拡張し、以下の機能を追加:
+ * - ローディング状態の表示（スピナーアニメーション）
+ * - ローディング中のテキスト切り替え
+ * - ローディング中の自動無効化
+ * - デフォルトでtype="submit"
+ * - 幅を親要素に合わせる（w-full）
+ *
+ * 使用例:
+ * - フォームの送信ボタン
+ * - 非同期処理を伴うアクション
+ * - APIリクエストの実行ボタン
+ *
+ * 注意: 単純なUIアクションの場合は、基本的なButtonコンポーネントを使用してください。
+ */
 import { Button } from "../../atoms/Button/Button";
 import type { ButtonProps } from "../../atoms/Button/Button";
 import { Loader2 } from "lucide-react";
