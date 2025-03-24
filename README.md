@@ -22,6 +22,27 @@
 - [スタイル定義ガイドライン](./docs/styling-guidelines.md)
 - [開発用コマンド集](./docs/development-commands.md)
 
+## コーディング規約
+
+プロジェクト全体で統一されたコードスタイルを維持するために、以下の規約に従ってください：
+
+### コンポーネント定義
+
+- 通常のコンポーネントは全てアロー関数を使用して定義する
+  ```typescript
+  // 良い例
+  const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+    return <button {...props}>{children}</button>;
+  };
+  ```
+
+### ルーティング規約
+
+- 認証が必要なページは `protected_` プレフィックスをつけたディレクトリ配下に配置する
+- URL に表示させないディレクトリ名は末尾にアンダースコア（`_`）をつける
+  - 例: `protected_.top.tsx` は `/top` でアクセス可能
+    @see: (レイアウトのネストなしのネストされた URL)[https://react-router-docs-ja.techtalk.jp/how-to/file-route-conventions#%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E3%83%8D%E3%82%B9%E3%83%88%E3%81%AA%E3%81%97%E3%81%AE%E3%83%8D%E3%82%B9%E3%83%88%E3%81%95%E3%82%8C%E3%81%9F-url]
+
 ## 機能概要
 
 ### 認証機能
