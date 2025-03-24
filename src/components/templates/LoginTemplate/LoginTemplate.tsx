@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import { AuthForm } from "src/components/organisms/AuthForm/AuthForm";
-import type { AuthenticationFormBase } from "src/types/forms/authentication-forms";
+import type { AuthenticationFormBase } from "src/features/auth/types";
 import { Heading } from "src/components/atoms/Typography/Heading";
 import { Text } from "src/components/atoms/Typography/Text";
 import { Card } from "src/components/atoms/Card";
+import { useAuth } from "src/features/auth/hooks/useAuth";
+import { LoadingSpinner } from "src/components/atoms/LoadingSpinner/LoadingSpinner";
+import { ErrorMessage } from "src/components/atoms/ErrorMessage/ErrorMessage";
 
 interface LoginTemplateProps {
   title: string;
@@ -14,15 +17,16 @@ export const LoginTemplate: React.FC<LoginTemplateProps> = ({
   title,
   subtitle,
 }) => {
+  const { login, isLoading, error } = useAuth();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<AuthenticationFormBase>();
 
-  const onSubmit = (data: AuthenticationFormBase) => {
-    // TODO: ログイン処理を追加
-    console.log(data);
+  const onSubmit = async (data: AuthenticationFormBase) => {
+    await login(data.email, data.password);
   };
 
   return (
@@ -37,12 +41,20 @@ export const LoginTemplate: React.FC<LoginTemplateProps> = ({
         </Heading>
         {subtitle && <Text variant="subtle">{subtitle}</Text>}
       </div>
-      <AuthForm
-        type="login"
-        onSubmit={handleSubmit(onSubmit)}
-        register={register}
-        errors={errors}
-      />
+      {error && <ErrorMessage message={error.message} className="mb-4" />}
+      <div className="relative">
+        <AuthForm
+          type="login"
+          onSubmit={handleSubmit(onSubmit)}
+          register={register}
+          errors={errors}
+        />
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white/50">
+            <LoadingSpinner size="lg" />
+          </div>
+        )}
+      </div>
     </Card>
   );
 };

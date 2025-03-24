@@ -21,6 +21,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             error && inputStyles.error,
             className
           )}
+          autoComplete={
+            type === "password"
+              ? "current-password"
+              : type === "email"
+              ? "email"
+              : undefined
+          }
           ref={ref}
           aria-invalid={!!error}
           aria-describedby={error ? `${inputId}-error` : undefined}
