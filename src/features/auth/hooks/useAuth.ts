@@ -49,10 +49,7 @@ export const useAuth = () => {
       setUser(user);
       setIsAuthenticated(true);
 
-      const token = getCookie(TOKEN_COOKIE_KEY);
-
-      const baseUrl = window.location.origin;
-      window.location.href = `${baseUrl}/top`;
+      navigate("/top");
 
       return { success: true, data: user };
     } catch (error) {
