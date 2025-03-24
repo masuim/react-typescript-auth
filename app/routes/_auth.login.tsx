@@ -2,11 +2,9 @@ import { LoginTemplate } from "../../src/components/templates/LoginTemplate/Logi
 
 export default function Login() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <LoginTemplate
-        title="ログイン"
-        subtitle="メールアドレスとパスワードを入力してください"
-      />
-    </div>
+    <LoginTemplate
+      title="ログイン"
+      subtitle="メールアドレスとパスワードを入力してください"
+    />
   );
 }
