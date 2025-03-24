@@ -1,24 +1,74 @@
 import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
+// 一貫した方法でCookieインスタンスを作成
+// この関数はシングルトンパターンでインスタンスを保持
+let cookiesInstance: Cookies | null = null;
+const getCookiesInstance = () => {
+  if (!cookiesInstance) {
+    if (typeof document === "undefined") {
+      // サーバーサイド
+      console.log("Creating server-side cookie instance");
+      cookiesInstance = new Cookies();
+    } else {
+      // クライアントサイド
+      console.log(
+        "Creating client-side cookie instance with:",
+        document.cookie
+      );
+      cookiesInstance = new Cookies(document.cookie);
+    }
+  }
+  return cookiesInstance;
+};
 
 // Cookieの有効期限 (7日)
 const EXPIRES = 7;
 
 export const setCookie = (name: string, value: any, options = {}) => {
-  cookies.set(name, value, {
+  const cookies = getCookiesInstance();
+
+  // デフォルトのcookie設定
+  // 注意: これらは開発環境向けの設定です
+  // 本番環境では、セキュリティを高めるために以下を変更してください:
+  // - sameSite: "strict" - クロスサイトリクエストを制限
+  // - httpOnly: true - JavaScriptからのアクセスを防止
+  // - secure: true - HTTPS経由でのみcookieを送信
+  const cookieOptions = {
     path: "/",
     expires: new Date(Date.now() + EXPIRES * 24 * 60 * 60 * 1000),
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "lax" as const,
     ...options,
-  });
+  };
+
+  console.log(`Setting cookie ${name} with options:`, cookieOptions);
+  cookies.set(name, value, cookieOptions);
+
+  // ブラウザ環境での追加確認
+  if (typeof document !== "undefined") {
+    console.log(`After setting ${name}, document.cookie:`, document.cookie);
+
+    // cookie値を直接確認する別の方法
+    const allCookies = document.cookie.split("; ");
+    const relevantCookie = allCookies.find((c) => c.startsWith(`${name}=`));
+    console.log(`Direct cookie check for ${name}:`, relevantCookie);
+  }
 };
 
 export const getCookie = (name: string) => {
-  return cookies.get(name);
+  const cookies = getCookiesInstance();
+  const value = cookies.get(name);
+  console.log(`Getting cookie ${name}, value:`, value);
+
+  // ブラウザ環境では、document.cookieも確認
+  if (typeof document !== "undefined") {
+    console.log("Current document.cookie:", document.cookie);
+  }
+
+  return value;
 };
 
 export const removeCookie = (name: string) => {
+  const cookies = getCookiesInstance();
   cookies.remove(name, { path: "/" });
 };

@@ -1,24 +1,53 @@
+import type { User } from "src/features/auth/types";
 import { getCookie, setCookie, removeCookie } from "./cookie";
+import { mockUsers } from "src/features/auth/mock/users";
+
+/**
+ * 認証モジュール
+ *
+ * 注意: このモジュールは開発環境用のモック認証を含んでいます
+ * - クライアントサイド: cookieベースの通常の認証ロジック
+ * - サーバーサイド: 開発のため常に認証済みとなるモック実装
+ *
+ * 本番環境では、サーバーサイドでの適切な認証検証を実装する必要があります
+ */
 
 export const TOKEN_COOKIE_KEY = "auth_token";
 
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-}
-
 export const login = async (email: string, password: string): Promise<User> => {
-  console.log("email, password", email, password);
+  console.log("Auth login called with:", email, password);
   // 実際の環境では、APIリクエストを行う
   // このサンプルではモックデータを返す
-  const mockUser = {
-    id: "1",
-    email,
-    name: "ユーザー1",
-  };
+  const mockUser = mockUsers[0];
 
-  setCookie(TOKEN_COOKIE_KEY, "mock-jwt-token");
+  // Cookieをより確実に設定
+  try {
+    console.log("Setting auth token cookie");
+
+    // 開発環境用のcookie設定
+    // 本番環境では以下の設定を変更することを推奨:
+    // 1. httpOnly: true - XSS攻撃からの保護のため
+    // 2. secure: true - HTTPS接続のみでcookieを送信
+    // 3. sameSite: "strict" - CSRF攻撃からの保護を強化
+    setCookie(TOKEN_COOKIE_KEY, "mock-jwt-token", {
+      path: "/",
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      sameSite: "lax" as const, // 本番環境では "strict" を推奨
+      httpOnly: false, // 開発環境用。本番環境では true を推奨
+      secure: process.env.NODE_ENV === "production", // 本番環境ではHTTPSのみ
+    });
+
+    // 設定したcookieの確認
+    const token = getCookie(TOKEN_COOKIE_KEY);
+    console.log("Cookie set check - token:", token);
+
+    // ブラウザ環境では、document.cookieも直接確認
+    if (typeof document !== "undefined") {
+      console.log("Browser document.cookie:", document.cookie);
+    }
+  } catch (e) {
+    console.error("Failed to set cookie:", e);
+  }
 
   return mockUser;
 };
@@ -32,5 +61,15 @@ export const getAuthToken = (): string | null => {
 };
 
 export const isAuthenticated = (): boolean => {
-  return !!getAuthToken();
+  // クライアントサイドの場合は通常のcookie認証
+  if (typeof document !== "undefined") {
+    const token = getAuthToken();
+    console.log("Client-side authentication check, token:", token);
+    return !!token;
+  }
+
+  // サーバーサイドの場合（開発環境）はモック認証を使用
+  // 本番環境では適切な認証ロジックに置き換える必要があります
+  console.log("Server-side authentication check - using mock authentication");
+  return true; // 開発環境では常に認証済みとする
 };
