@@ -39,6 +39,7 @@
 ### ルーティング規約
 
 - 認証が必要なページは `protected_` プレフィックスをつけたディレクトリ配下に配置する
+- これは、@react-router/fs-routes パッケージ の規約に沿ったルート設定です
 - URL に表示させないディレクトリ名は末尾にアンダースコア（`_`）をつける
   - 例: `protected_.top.tsx` は `/top` でアクセス可能
     @see: (レイアウトのネストなしのネストされた URL)[https://react-router-docs-ja.techtalk.jp/how-to/file-route-conventions#%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E3%83%8D%E3%82%B9%E3%83%88%E3%81%AA%E3%81%97%E3%81%AE%E3%83%8D%E3%82%B9%E3%83%88%E3%81%95%E3%82%8C%E3%81%9F-url]
