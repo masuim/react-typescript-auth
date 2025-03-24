@@ -1,3 +1,4 @@
+// 仮の認証ユーザータイプ - APIの仕様に合わせて拡張すること
 export interface User {
   id: string;
   email: string;

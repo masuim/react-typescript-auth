@@ -7,7 +7,10 @@ import { Button } from "../../atoms/LinkAndButton/Button/Button";
 import { Text } from "../../atoms/Typography/Text";
 import type { UseFormRegister } from "react-hook-form";
 import { usePasswordVisibility } from "../../../hooks/usePasswordVisibility";
-import type { LoginFormData, RegisterFormData } from "../../../types";
+import type {
+  LoginFormData,
+  RegisterFormData,
+} from "../../../features/auth/types";
 
 type FormData = LoginFormData & Partial<RegisterFormData>;
 

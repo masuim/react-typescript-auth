@@ -1,28 +1,21 @@
-import { redirect } from "react-router-dom";
 import { Heading } from "../../src/components/atoms/Typography/Heading";
 import { Text } from "../../src/components/atoms/Typography/Text";
 import { Card } from "../../src/components/atoms/Card";
-import { isAuthenticated } from "../lib/auth";
 import { useAuthStore } from "../../src/features/auth/store/authStore";
-import { getAuthToken } from "../lib/auth";
-
-export async function loader() {
-  // 認証チェック（開発環境ではモック認証を使用）
-  const authenticated = isAuthenticated();
-
-  // 本来は認証が必要だが、開発環境ではサーバーサイドは常に認証OK
-  if (!authenticated) {
-    return redirect("/login");
-  }
-
-  return {
-    authenticated: true,
-    timestamp: new Date().toISOString(),
-  };
-}
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../src/features/auth/services/authService";
 
 export default function TopPage() {
   const user = useAuthStore((state) => state.user);
+  const navigate = useNavigate();
+
+  // コンポーネント内でも認証状態をチェック
+  useEffect(() => {
+    if (!isAuthenticated() || !user) {
+      navigate("/login");
+    }
+  }, [navigate, user]);
 
   const userData = user || {
     name: "テストユーザー",
