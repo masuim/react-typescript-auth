@@ -42,7 +42,7 @@
 - これは、@react-router/fs-routes パッケージ の規約に沿ったルート設定です
 - URL に表示させないディレクトリ名は末尾にアンダースコア（`_`）をつける
   - 例: `protected_.top.tsx` は `/top` でアクセス可能
-  - 参考: <a href="https://react-router-docs-ja.techtalk.jp/how-to/file-route-conventions#レイアウトのネストなしのネストされた-url" target="_blank">レイアウトのネストなしのネストされた URL</a>
+  - 参考: [レイアウトのネストなしのネストされた URL](https://react-router-docs-ja.techtalk.jp/how-to/file-route-conventions#レイアウトのネストなしのネストされた-url)
 
 ## 機能概要
 
