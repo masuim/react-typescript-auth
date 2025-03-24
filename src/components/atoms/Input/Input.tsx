@@ -1,4 +1,4 @@
-import * as React from "react";
+import { forwardRef } from "react";
 import { cn } from "../../../lib/utils";
 
 export interface InputProps
@@ -6,7 +6,7 @@ export interface InputProps
   error?: string;
 }
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, error, ...props }, ref) => {
     const inputId = props.id || props.name;
 

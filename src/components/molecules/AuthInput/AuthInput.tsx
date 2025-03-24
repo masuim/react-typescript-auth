@@ -1,9 +1,10 @@
-import * as React from "react";
+import { forwardRef, type InputHTMLAttributes } from "react";
 import { Input } from "../../atoms/Input/Input";
 import { Label } from "../../atoms/Label/Label";
 import { cn } from "../../../lib/utils";
 import { Eye, EyeOff } from "lucide-react";
-import { Button } from "../../atoms/Button/Button";
+import { Button } from "../../atoms/LinkAndButton/Button/Button";
+import { Text } from "../../atoms/Typography/Text";
 import type { UseFormRegister } from "react-hook-form";
 import { usePasswordVisibility } from "../../../hooks/usePasswordVisibility";
 import type { LoginFormData, RegisterFormData } from "../../../types";
@@ -11,7 +12,7 @@ import type { LoginFormData, RegisterFormData } from "../../../types";
 type FormData = LoginFormData & Partial<RegisterFormData>;
 
 export interface AuthInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "name"> {
   label: string;
   name: keyof FormData;
   error?: string;
@@ -19,7 +20,7 @@ export interface AuthInputProps
   register?: UseFormRegister<FormData>;
 }
 
-export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
+export const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(
   (
     { className, label, error, required, type, name, register, ...props },
     ref
@@ -55,7 +56,11 @@ export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
             />
           )}
         </div>
-        {error && <p className={STYLES.error}>{error}</p>}
+        {error && (
+          <Text variant="muted" className="text-destructive">
+            {error}
+          </Text>
+        )}
       </div>
     );
   }
@@ -66,10 +71,10 @@ interface PasswordToggleButtonProps {
   onToggle: () => void;
 }
 
-const PasswordToggleButton: React.FC<PasswordToggleButtonProps> = ({
+const PasswordToggleButton = ({
   showPassword,
   onToggle,
-}) => (
+}: PasswordToggleButtonProps) => (
   <Button
     type="button"
     variant="ghost"
@@ -88,7 +93,6 @@ const PasswordToggleButton: React.FC<PasswordToggleButtonProps> = ({
 
 const STYLES = {
   container: "flex flex-col gap-2",
-  error: "text-sm text-destructive",
   passwordInput: "pr-10",
   passwordButton:
     "absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent",
