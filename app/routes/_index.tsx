@@ -1,24 +1,20 @@
-import { Link } from "react-router-dom";
-import { cn } from "src/lib/utils";
-import { buttonVariants } from "src/components/atoms/Button/Button";
-import { theme } from "src/config/theme";
+import { Heading } from "src/components/atoms/Typography/Heading";
+import { Text } from "src/components/atoms/Typography/Text";
+import { InternalLinkButton } from "src/components/atoms/Typography/InternalLinkButton";
 
 export default function Index() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
       <div className="max-w-2xl w-full text-center">
-        <h1 className="text-4xl font-bold mb-6">
+        <Heading level="h1" className="mb-6">
           React TypeScript Auth Template
-        </h1>
-        <p className="text-lg mb-8 text-gray-600 dark:text-gray-300">
+        </Heading>
+        <Text variant="large" className="mb-8">
           認証機能を備えた再利用可能なReactテンプレート
-        </p>
-        <Link
-          to="/login"
-          className={cn(buttonVariants({ variant: theme.button.primary }))}
-        >
+        </Text>
+        <InternalLinkButton to="/login" variant="default">
           ログイン
-        </Link>
+        </InternalLinkButton>
       </div>
     </div>
   );
