@@ -1,7 +1,6 @@
 import React from "react";
 import { Heading } from "../../src/components/atoms/Typography/Heading";
 import { Text } from "../../src/components/atoms/Typography/Text";
-import { Button } from "../../src/components/atoms/LinkAndButton/Button/Button";
 
 const ProtectedPage: React.FC = () => {
   // TODO: 後で実際のユーザー情報を取得する処理を追加
