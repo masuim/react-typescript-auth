@@ -4,7 +4,7 @@ import {
   type LinkProps as RouterLinkProps,
 } from "react-router-dom";
 import { cn } from "../../../lib/utils";
-import { buttonVariants } from "../../atoms/Button/Button";
+import { buttonVariants } from "../Button/Button";
 
 type ButtonVariant =
   | "default"
