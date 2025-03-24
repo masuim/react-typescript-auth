@@ -1,7 +1,4 @@
-import {
-  Link as RouterLink,
-  type LinkProps as RouterLinkProps,
-} from "react-router-dom";
+import { Link, type LinkProps } from "react-router-dom";
 import { cn } from "../../../lib/utils";
 import { buttonVariants } from "../Button/Button";
 import { forwardRef } from "react";
@@ -14,8 +11,7 @@ type ButtonVariant =
   | "ghost";
 type ButtonSize = "default" | "sm" | "lg" | "icon";
 
-export interface InternalLinkButtonProps
-  extends Omit<RouterLinkProps, "className"> {
+export interface InternalLinkButtonProps extends Omit<LinkProps, "className"> {
   /**
    * ボタンのバリアント
    * @default "default"
@@ -37,8 +33,9 @@ export interface InternalLinkButtonProps
 }
 
 /**
- * ボタンのような見た目のアプリケーション内リンクコンポーネント
- * CTAやメインアクションとして使用することを想定しています
+ * アプリケーション内の画面遷移に使用するボタン型のリンクコンポーネント
+ * ユーザーが直感的に操作できるようにボタンのようなスタイルがついています
+ * react-router-domのLinkをラップしています
  */
 export const InternalLinkButton = forwardRef<
   HTMLAnchorElement,
@@ -56,7 +53,7 @@ export const InternalLinkButton = forwardRef<
     ref
   ) => {
     return (
-      <RouterLink
+      <Link
         to={to}
         ref={ref}
         className={cn(
@@ -69,7 +66,7 @@ export const InternalLinkButton = forwardRef<
         {...props}
       >
         {children}
-      </RouterLink>
+      </Link>
     );
   }
 );

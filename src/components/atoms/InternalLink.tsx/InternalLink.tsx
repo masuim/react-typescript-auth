@@ -1,14 +1,11 @@
-import {
-  Link as RouterLink,
-  type LinkProps as RouterLinkProps,
-} from "react-router-dom";
+import { Link, type LinkProps } from "react-router-dom";
 import { cn } from "../../../lib/utils";
 import { theme } from "../../../config/theme";
 import { forwardRef } from "react";
 
 type LinkVariant = keyof typeof theme.typography.link;
 
-export interface InternalLinkProps extends Omit<RouterLinkProps, "className"> {
+export interface InternalLinkProps extends Omit<LinkProps, "className"> {
   /**
    * リンクのバリアント
    * @default "default"
@@ -33,14 +30,9 @@ export const InternalLink = forwardRef<HTMLAnchorElement, InternalLinkProps>(
     const linkStyle = theme.typography.link[variant];
 
     return (
-      <RouterLink
-        to={to}
-        ref={ref}
-        className={cn(linkStyle, className)}
-        {...props}
-      >
+      <Link to={to} ref={ref} className={cn(linkStyle, className)} {...props}>
         {children}
-      </RouterLink>
+      </Link>
     );
   }
 );
