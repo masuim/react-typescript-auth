@@ -26,10 +26,7 @@ export const LoginTemplate: React.FC<LoginTemplateProps> = ({
   } = useForm<AuthenticationFormBase>();
 
   const onSubmit = async (data: AuthenticationFormBase) => {
-    console.log("Login form submitted with:", data);
-
     try {
-      // login関数に処理を委譲
       const result = await login(data.email, data.password);
       console.log("Login process completed with result:", result);
     } catch (e) {

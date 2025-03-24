@@ -7,22 +7,14 @@ import { useAuthStore } from "../../src/features/auth/store/authStore";
 import { getAuthToken } from "../lib/auth";
 
 export async function loader() {
-  console.log("Top page loader executed");
-
-  // document.cookieの直接確認（サーバーサイドなのでundefined）
-  console.log("Server-side document access:", typeof document);
-
   // 認証チェック（開発環境ではモック認証を使用）
   const authenticated = isAuthenticated();
-  console.log("Authentication status:", authenticated);
 
   // 本来は認証が必要だが、開発環境ではサーバーサイドは常に認証OK
   if (!authenticated) {
-    console.log("Not authenticated, redirecting to login");
     return redirect("/login");
   }
 
-  console.log("Authenticated, rendering top page");
   return {
     authenticated: true,
     timestamp: new Date().toISOString(),
@@ -30,10 +22,8 @@ export async function loader() {
 }
 
 export default function TopPage() {
-  // Zustandストアからユーザー情報を取得
   const user = useAuthStore((state) => state.user);
 
-  // フォールバック用のモックデータ
   const userData = user || {
     name: "テストユーザー",
     email: "test@example.com",

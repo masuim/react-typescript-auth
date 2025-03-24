@@ -6,15 +6,8 @@ let cookiesInstance: Cookies | null = null;
 const getCookiesInstance = () => {
   if (!cookiesInstance) {
     if (typeof document === "undefined") {
-      // サーバーサイド
-      console.log("Creating server-side cookie instance");
       cookiesInstance = new Cookies();
     } else {
-      // クライアントサイド
-      console.log(
-        "Creating client-side cookie instance with:",
-        document.cookie
-      );
       cookiesInstance = new Cookies(document.cookie);
     }
   }
@@ -41,30 +34,12 @@ export const setCookie = (name: string, value: any, options = {}) => {
     ...options,
   };
 
-  console.log(`Setting cookie ${name} with options:`, cookieOptions);
   cookies.set(name, value, cookieOptions);
-
-  // ブラウザ環境での追加確認
-  if (typeof document !== "undefined") {
-    console.log(`After setting ${name}, document.cookie:`, document.cookie);
-
-    // cookie値を直接確認する別の方法
-    const allCookies = document.cookie.split("; ");
-    const relevantCookie = allCookies.find((c) => c.startsWith(`${name}=`));
-    console.log(`Direct cookie check for ${name}:`, relevantCookie);
-  }
 };
 
 export const getCookie = (name: string) => {
   const cookies = getCookiesInstance();
   const value = cookies.get(name);
-  console.log(`Getting cookie ${name}, value:`, value);
-
-  // ブラウザ環境では、document.cookieも確認
-  if (typeof document !== "undefined") {
-    console.log("Current document.cookie:", document.cookie);
-  }
-
   return value;
 };
 
