@@ -2,7 +2,6 @@ import { Button } from "../../atoms/Button/Button";
 import type { ButtonProps } from "../../atoms/Button/Button";
 import { Loader2 } from "lucide-react";
 import { cn } from "../../../lib/utils";
-import { theme } from "../../../config/theme";
 import { forwardRef } from "react";
 
 export interface SubmitButtonProps extends Omit<ButtonProps, "asChild"> {
@@ -19,7 +18,7 @@ export const SubmitButton = forwardRef<HTMLButtonElement, SubmitButtonProps>(
       isLoading = false,
       loadingText,
       type = "submit",
-      variant = theme.button.primary,
+      variant = "default",
       ...props
     },
     ref
