@@ -1,6 +1,6 @@
-import * as React from "react";
 import { cn } from "../../../lib/utils";
 import { theme } from "../../../config/theme";
+import { forwardRef } from "react";
 
 type LinkVariant = keyof typeof theme.typography.link;
 
@@ -34,10 +34,7 @@ export interface ExternalLinkProps
  * 外部サイトへのリンクに使用するコンポーネント
  * セキュリティのため、rel="noopener noreferrer"が自動で付与されます
  */
-export const ExternalLink = React.forwardRef<
-  HTMLAnchorElement,
-  ExternalLinkProps
->(
+export const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
   (
     {
       variant = "default",

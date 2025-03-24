@@ -1,19 +1,16 @@
-import * as React from "react";
 import { Button } from "../../atoms/Button/Button";
 import type { ButtonProps } from "../../atoms/Button/Button";
 import { Loader2 } from "lucide-react";
 import { cn } from "../../../lib/utils";
 import { theme } from "../../../config/theme";
+import { forwardRef } from "react";
 
 export interface SubmitButtonProps extends Omit<ButtonProps, "asChild"> {
   isLoading?: boolean;
   loadingText?: string;
 }
 
-export const SubmitButton = React.forwardRef<
-  HTMLButtonElement,
-  SubmitButtonProps
->(
+export const SubmitButton = forwardRef<HTMLButtonElement, SubmitButtonProps>(
   (
     {
       children,

@@ -1,6 +1,6 @@
-import * as React from "react";
 import { cn } from "../../../lib/utils";
 import { theme } from "../../../config/theme";
+import { forwardRef } from "react";
 
 type TextVariant = keyof typeof theme.typography.text;
 
@@ -21,7 +21,7 @@ export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
   as?: "p" | "span" | "div";
 }
 
-export const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
+export const Text = forwardRef<HTMLParagraphElement, TextProps>(
   (
     { variant = "default", as: Component = "p", className, children, ...props },
     ref

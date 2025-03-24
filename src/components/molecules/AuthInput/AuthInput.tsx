@@ -1,4 +1,4 @@
-import * as React from "react";
+import { forwardRef, type InputHTMLAttributes } from "react";
 import { Input } from "../../atoms/Input/Input";
 import { Label } from "../../atoms/Label/Label";
 import { cn } from "../../../lib/utils";
@@ -12,7 +12,7 @@ import type { LoginFormData, RegisterFormData } from "../../../types";
 type FormData = LoginFormData & Partial<RegisterFormData>;
 
 export interface AuthInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "name"> {
   label: string;
   name: keyof FormData;
   error?: string;
@@ -20,7 +20,7 @@ export interface AuthInputProps
   register?: UseFormRegister<FormData>;
 }
 
-export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
+export const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(
   (
     { className, label, error, required, type, name, register, ...props },
     ref
@@ -71,10 +71,10 @@ interface PasswordToggleButtonProps {
   onToggle: () => void;
 }
 
-const PasswordToggleButton: React.FC<PasswordToggleButtonProps> = ({
+const PasswordToggleButton = ({
   showPassword,
   onToggle,
-}) => (
+}: PasswordToggleButtonProps) => (
   <Button
     type="button"
     variant="ghost"

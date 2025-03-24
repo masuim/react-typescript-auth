@@ -1,6 +1,6 @@
-import * as React from "react";
 import { cn } from "../../../lib/utils";
 import { theme } from "../../../config/theme";
+import { forwardRef } from "react";
 
 type HeadingLevel = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
@@ -15,7 +15,7 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
 }
 
-export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
+export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ level, className, children, ...props }, ref) => {
     const Component = level;
     const headingStyle = theme.typography.heading[level];

@@ -1,10 +1,10 @@
-import * as React from "react";
 import {
   Link as RouterLink,
   type LinkProps as RouterLinkProps,
 } from "react-router-dom";
 import { cn } from "../../../lib/utils";
 import { buttonVariants } from "../Button/Button";
+import { forwardRef } from "react";
 
 type ButtonVariant =
   | "default"
@@ -40,7 +40,7 @@ export interface InternalLinkButtonProps
  * ボタンのような見た目のアプリケーション内リンクコンポーネント
  * CTAやメインアクションとして使用することを想定しています
  */
-export const InternalLinkButton = React.forwardRef<
+export const InternalLinkButton = forwardRef<
   HTMLAnchorElement,
   InternalLinkButtonProps
 >(
