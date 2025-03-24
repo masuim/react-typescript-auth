@@ -69,5 +69,3 @@ export const ExternalLink = React.forwardRef<
     );
   }
 );
-
-ExternalLink.displayName = "ExternalLink";
