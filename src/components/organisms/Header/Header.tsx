@@ -1,5 +1,5 @@
 import { useAuth } from "@/features/auth/hooks/useAuth";
-import { Button } from "@/components/atoms/Button";
+import { Button } from "@/components/atoms/links-and-buttons/Button";
 
 export const Header = () => {
   const { isAuthenticated, logout } = useAuth();

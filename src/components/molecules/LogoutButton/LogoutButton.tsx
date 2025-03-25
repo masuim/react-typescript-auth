@@ -1,18 +1,13 @@
-import { Button } from "@/components/atoms/Button";
+import { Button } from "@/components/atoms/links-and-buttons/Button";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { removeCookie } from "@/lib/cookie";
 import { PATHS } from "@/features/auth/constants/paths";
+import type { ButtonVariant } from "@/components/atoms/links-and-buttons/styles/button-styles";
 
 interface LogoutButtonProps {
   className?: string;
-  variant?:
-    | "default"
-    | "secondary"
-    | "destructive"
-    | "outline"
-    | "ghost"
-    | "link";
+  variant?: ButtonVariant;
 }
 
 export const LogoutButton = ({

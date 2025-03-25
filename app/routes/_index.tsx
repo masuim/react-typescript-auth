@@ -1,4 +1,4 @@
-import { InternalLinkButton } from "@/components/atoms/links/InternalLinkButton";
+import { InternalLinkButton } from "@/components/atoms/links-and-buttons/InternalLinkButton/InternalLinkButton";
 import { Heading, Text } from "@/components/atoms/typography";
 import { PATHS } from "@/features/auth/constants/paths";
 
@@ -11,7 +11,7 @@ export default function Index() {
       <Text variant="large" className="mb-8">
         認証機能を備えたReactテンプレート
       </Text>
-      <InternalLinkButton to={PATHS.AUTH.LOGIN} variant="default">
+      <InternalLinkButton to={PATHS.AUTH.LOGIN} variant="primary">
         ログイン
       </InternalLinkButton>
     </div>

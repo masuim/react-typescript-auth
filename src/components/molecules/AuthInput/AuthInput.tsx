@@ -4,7 +4,7 @@ import { Input } from "@/components/atoms/Input";
 import { Label } from "@/components/atoms/Label";
 import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
-import { Button } from "@/components/atoms/Button";
+import { Button } from "@/components/atoms/links-and-buttons/Button";
 import { Text } from "@/components/atoms/typography";
 import type { UseFormRegister } from "react-hook-form";
 import { usePasswordVisibility } from "@/features/auth/hooks/usePasswordVisibility";

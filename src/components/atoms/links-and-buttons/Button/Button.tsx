@@ -13,51 +13,57 @@
  * 注意: フォーム送信やローディング状態が必要な場合は、SubmitButtonを使用してください。
  */
 import { forwardRef } from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { buttonStyles } from "@/design-system";
+import { LoadingSpinner } from "@/components/atoms/loadings/LoadingSpinner";
+import type {
+  ButtonVariant,
+  ButtonSize,
+} from "@/components/atoms/links-and-buttons/styles/button-styles";
+import {
+  buttonBaseStyles,
+  buttonVariantStyles,
+  buttonSizeStyles,
+} from "@/components/atoms/links-and-buttons/styles/button-styles";
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  isLoading?: boolean;
+  asChild?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-
+  (
+    {
+      className,
+      variant = "default",
+      size = "default",
+      type = "button",
+      disabled = false,
+      isLoading = false,
+      asChild = false,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+      <button
         ref={ref}
+        type={type}
+        disabled={disabled || isLoading}
+        className={cn(
+          buttonBaseStyles,
+          buttonVariantStyles[variant],
+          buttonSizeStyles[size],
+          className
+        )}
         {...props}
-      />
+      >
+        {isLoading && <LoadingSpinner className="mr-2" size="sm" />}
+        {children}
+      </button>
     );
   }
 );
-
-export const buttonVariants = cva(
-  [
-    buttonStyles.base.layout,
-    buttonStyles.base.appearance,
-    buttonStyles.base.interaction,
-    buttonStyles.base.state,
-  ].join(" "),
-  {
-    variants: {
-      variant: buttonStyles.variants,
-      size: buttonStyles.sizes,
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-);
-
-type ButtonVariant = keyof typeof buttonStyles.variants;
-type ButtonSize = keyof typeof buttonStyles.sizes;
