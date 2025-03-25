@@ -1,12 +1,11 @@
-import { useAuthStore } from "@/features/auth/store/authStore";
-import { isAuthenticated } from "@/features/auth/services/authService";
+import { useAuthStore } from "@/features/auth/store/useAuthStore";
+import { isAuthenticated } from "@/features/auth/services/auth";
 import { useEffect, useState } from "react";
 import {
   useLoginMutation,
   useLogoutMutation,
-  handleAuthError,
 } from "@/features/auth/hooks/queries";
-
+import { handleAuthError } from "@/features/auth/utils";
 /**
  * 認証関連の操作と状態を管理するカスタムフック
  * TanStack Queryを使用して認証操作を最適化
