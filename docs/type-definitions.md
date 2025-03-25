@@ -1,104 +1,139 @@
 # 型定義ガイドライン
 
+## 型の分類
+
+型定義は以下の 2 つのカテゴリに分類されます：
+
+1. **スキーマ（`schemas/`）**
+
+   - Zod を使用したバリデーションスキーマの定義
+   - フォームの入力値の検証ルール
+   - 例：`loginSchema`, `registerSchema`
+   - スキーマから型を生成する場合は`z.infer`を使用
+   - 例：`type LoginFormValues = z.infer<typeof loginSchema>`
+
+2. **型定義（`types/`）**
+   - スキーマ以外のすべての型定義
+   - ドメインの型（`User`, `Profile`など）
+   - API 関連の型（`LoginRequest`, `LoginResponse`など）
+   - エラー型（`AuthError`など）
+   - その他のインターフェースや型
+
 ## ディレクトリ構造
 
 型定義ファイルは以下のディレクトリ構造に従って整理されています：
 
 ```
-src/types/
-├── common/              # 共通の型定義
-│   ├── index.ts        # 共通の型定義のエクスポート
-│   ├── utility-types.ts # ユーティリティ型
-│   └── shared.ts       # 共有インターフェース
-├── forms/              # フォーム関連の型定義
-│   ├── index.ts        # フォーム関連の型定義のエクスポート
-│   └── [domain]-forms.ts # ドメインごとのフォーム型定義
-├── api/                # API関連の型定義
-│   ├── index.ts        # API関連の型定義のエクスポート
-│   ├── requests.ts     # APIリクエストの型定義
-│   └── responses.ts    # APIレスポンスの型定義
-└── index.ts            # すべての型定義のエクスポート
+src/
+├── features/
+│   └── [feature-name]/       # 機能ごとのディレクトリ
+│       ├── types/           # 型定義
+│       │   ├── index.ts    # 型定義のエクスポート
+│       │   ├── domain.ts   # ドメインの型定義
+│       │   └── api.ts      # API関連の型定義
+│       └── schemas/         # バリデーションスキーマ
+│           └── [feature-name]Schemas.ts  # スキーマと関連する型定義
+└── types/
+    └── shared/             # 共有の型定義
+        └── index.ts       # 共有型定義のエクスポート
 ```
 
 ## 命名規則
 
-### インターフェース
+### ファイル名
 
-- 基本インターフェース: `[Domain]Base`
-  - 例: `AuthenticationFormBase`
-- 具体的な実装: `[UseCase][Domain]`
-  - 例: `LoginFormData`, `RegisterFormData`
-- Props: `[ComponentName]Props`
-  - 例: `AuthInputProps`
+- ドメイン型定義: `domain.ts`
+  - 例: `src/features/auth/types/domain.ts`
+- API 関連: `api.ts`
+  - 例: `src/features/auth/types/api.ts`
+- スキーマ: `[feature-name]Schemas.ts`
+  - 例: `authSchemas.ts`
 
-### ファイル
+### 型名
 
-- ドメイン固有のフォーム: `[domain]-forms.ts`
-  - 例: `authentication-forms.ts`
-- API 関連: `[domain]-[requests/responses].ts`
-  - 例: `auth-requests.ts`, `auth-responses.ts`
+- ドメイン型: `[Domain]`
+  - 例: `User`, `Profile`
+- フォーム値: `[UseCase]FormValues`
+  - 例: `LoginFormValues`, `RegisterFormValues`
+- エラー: `[Feature]Error`
+  - 例: `AuthError`
+- API 関連: `[UseCase][Request/Response]`
+  - 例: `LoginRequest`, `LoginResponse`
 
 ## ベストプラクティス
 
-1. **継承の活用**
+1. **型定義の分類**
 
    ```typescript
-   interface AuthenticationFormBase {
+   // domain.ts - ドメインの型定義
+   export interface User {
+     id: string;
+     name: string;
+     email: string;
+   }
+
+   // api.ts - API関連の型定義
+   export interface LoginRequest {
      email: string;
      password: string;
    }
-
-   interface LoginFormData extends AuthenticationFormBase {}
    ```
 
-2. **ドキュメンテーション**
+2. **スキーマと型定義の連携**
 
    ```typescript
-   /**
-    * 認証フォームの基本インターフェース
-    * ログインと登録フォームの共通フィールドを定義
-    */
-   interface AuthenticationFormBase {
-     // ...
-   }
+   // authSchemas.ts
+   export const loginSchema = z.object({...});
+   export type LoginFormValues = z.infer<typeof loginSchema>;
    ```
 
 3. **エクスポート管理**
 
    ```typescript
-   // forms/index.ts
-   export * from "./authentication-forms";
+   // types/index.ts
+   export * from "./domain";
+   export * from "./api";
    ```
 
 4. **型の再利用**
+
    ```typescript
-   // common/utility-types.ts
-   export type Nullable<T> = T | null;
+   // 共通のプロパティを持つ型の定義
+   interface BaseUser {
+     id: string;
+     email: string;
+   }
+
+   interface AdminUser extends BaseUser {
+     role: "admin";
+   }
    ```
 
 ## 新しい型定義の追加手順
 
-1. 適切なドメインディレクトリを選択または作成
-2. 命名規則に従ってファイルを作成
+1. 適切な機能（feature）ディレクトリを選択または作成
+2. `types`ディレクトリ内に適切なファイルを作成
+   - ドメインの型定義は`domain.ts`
+   - API 関連の型は`api.ts`
+   - バリデーションスキーマは`schemas/[feature-name]Schemas.ts`
 3. JSDoc コメントで型の説明を追加
 4. `index.ts`でエクスポートを追加
-5. 必要に応じて既存の型を継承または拡張
 
 ## 注意事項
 
 1. **型定義ファイルの配置**
 
-   - 新しい型定義は必ず`src/types/`以下の適切なサブディレクトリに配置
-   - ルートの`src/types/`直下には`index.ts`以外のファイルを配置しない
-   - コンポーネント固有の型定義も`src/types/`以下に配置
+   - 機能固有の型定義は各機能の`src/features/[feature-name]/types/`に配置
+   - 複数の機能で共有される型定義は`src/types/shared/`に配置
+   - スキーマ関連の型定義は`src/features/[feature-name]/schemas/`に配置
 
 2. **型定義の重複防止**
 
    - 既存の型の再利用を優先
-   - 重複する型は適切な場所に統合
-   - 共通の型は`common`ディレクトリに配置
+   - 共通の型は適切な場所に抽出
+   - 重複する型定義は統合
 
-3. **コンポーネントの型定義**
-   - Props インターフェースはコンポーネントファイル内で直接定義
-   - 共有される型定義は`src/types/`以下に配置
-   - フォームデータの型定義は`src/types/forms/`に配置
+3. **命名の一貫性**
+   - 各機能内で一貫した命名規則を使用
+   - 明確で理解しやすい名前を選択
+   - 略語は避け、完全な単語を使用

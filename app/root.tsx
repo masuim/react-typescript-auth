@@ -7,11 +7,11 @@ import {
   ScrollRestoration,
 } from "react-router";
 import type { Route } from "./+types/root";
-import { Heading, Text } from "@/components/atoms/Typography";
-import { InternalLink } from "@/components/atoms/LinkAndButton";
+import { Heading, Text } from "@/components/atoms/typography";
+import { InternalLink } from "@/components/atoms/links/InternalLink";
 import { PageLayout } from "@/components/templates/PageLayout";
 import "./app.css";
-import { QueryProvider } from "./providers/QueryProvider";
+import { QueryProvider } from "@/providers/QueryProvider";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

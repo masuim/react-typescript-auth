@@ -5,7 +5,7 @@ import {
   useLoginMutation,
   useLogoutMutation,
   handleAuthError,
-} from "@/hooks/queries";
+} from "@/features/auth/hooks/queries";
 
 /**
  * 認証関連の操作と状態を管理するカスタムフック

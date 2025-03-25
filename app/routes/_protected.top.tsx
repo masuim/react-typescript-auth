@@ -1,11 +1,11 @@
 import { useAuthStore } from "@/features/auth/store/authStore";
-import { Heading, Text } from "@/components/atoms/Typography";
+import { Heading, Text } from "@/components/atoms/typography";
 import { Card } from "@/components/atoms/Card";
 import { useAuth } from "@/features/auth/hooks/useAuth";
-import { Button } from "@/components/atoms/LinkAndButton";
+import { Button } from "@/components/atoms/buttons/Button";
 import { Loading } from "@/components/atoms/Loading";
 import { ErrorMessage } from "@/components/atoms/ErrorMessage";
-import { useUsersQuery } from "@/hooks/queries";
+import { useUsersQuery } from "@/features/auth/hooks/queries";
 
 /**
  * NOTE: ユーザーデータの取得と管理に関するベストプラクティスについて
