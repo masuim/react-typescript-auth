@@ -75,20 +75,8 @@ export const logout = (): void => {
  */
 export const isAuthenticated = (cookieStr?: string): boolean => {
   try {
-    // Cookieからトークンを取得して確認
     const token = getCookie(AUTH_TOKEN_KEY, cookieStr);
     const isAuth = !!token;
-
-    // デバッグ用
-    console.log(
-      "isAuthenticated check:",
-      isAuth,
-      "token:",
-      token,
-      "cookieStr provided:",
-      !!cookieStr
-    );
-
     return isAuth;
   } catch (error) {
     console.error("認証チェック中にエラーが発生:", error);

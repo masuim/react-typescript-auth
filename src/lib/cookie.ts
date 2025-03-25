@@ -13,31 +13,18 @@ export function getCookie(
 ): string | undefined {
   // サーバーサイド: クッキー文字列から値を抽出
   if (typeof window === "undefined" && cookieStr) {
-    console.log(
-      `サーバーサイドでクッキー「${name}」を検索中、cookieStr:`,
-      cookieStr
-    );
-
     // より厳密な正規表現パターンを使用
     const regex = new RegExp(`(?:^|;\\s*)${name}=([^;]*)(?:;|$)`);
     const match = regex.exec(cookieStr);
 
     if (match) {
-      console.log(
-        `サーバーサイドでクッキー「${name}」の値を見つけました:`,
-        match[1]
-      );
       return decodeURIComponent(match[1]);
     }
-
-    console.log(`サーバーサイドでクッキー「${name}」が見つかりませんでした`);
     return undefined;
   } else {
     // クライアントサイド: universal-cookiesを使用
     const cookies = new Cookies();
-    const value = cookies.get(name);
-    console.log(`クライアントサイドでクッキー「${name}」の値:`, value);
-    return value;
+    return cookies.get(name);
   }
 }
 
@@ -62,9 +49,6 @@ export function setCookie(
   };
 
   cookies.set(name, value, { ...defaultOptions, ...options });
-
-  // デバッグ用
-  console.log(`クッキーが設定されました: ${name}=${value}`);
 }
 
 /**
@@ -80,7 +64,4 @@ export function removeCookie(
   const defaultOptions: CookieSetOptions = { path: "/" };
 
   cookies.remove(name, { ...defaultOptions, ...options });
-
-  // デバッグ用
-  console.log(`クッキーが削除されました: ${name}`);
 }
