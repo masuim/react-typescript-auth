@@ -1,14 +1,14 @@
-import { useAuthStore } from "@/features/auth/store/authStore";
+import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import { Heading, Text } from "@/components/atoms/typography";
 import { Card } from "@/components/atoms/Card";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { Button } from "@/components/atoms/Button";
 import { Loading } from "@/components/atoms/loadings";
 import { ErrorMessage } from "@/components/atoms/ErrorMessage";
-import { useUsersQuery } from "@/features/auth/hooks/queries";
+import { useUsersQuery } from "@/features/users/hooks/queries/useUsers";
 
 /**
- * NOTE: ユーザーデータの取得と管理に関するベストプラクティスについて
+ * NOTE: ユーザーデータの取得と管理について
  * 【関連ファイル】
  * - src/features/auth/store/authStore.ts: 認証状態とユーザー情報をストアで管理する実装
  * - src/hooks/queries.ts: ユーザーデータをクエリで取得する実装
@@ -40,6 +40,55 @@ import { useUsersQuery } from "@/features/auth/hooks/queries";
 
 /**
  * トップページコンポーネント
+ *
+ * 【データ取得と管理の戦略】
+ * 詳細は @/features/auth/store/useAuthStore.ts を参照
+ *
+ * 【関連ファイル】
+ * - src/features/auth/store/useAuthStore.ts: 認証状態とユーザー情報の管理
+ * - src/features/users/hooks/queries/useUsers.ts: ユーザー一覧データの取得
+ *
+ * 【実装の特徴】
+ * - 認証済みユーザーのみがアクセス可能
+ * - 現在のユーザー情報はストアから取得
+ * - ユーザー一覧はクエリで取得し、最新データを表示
+ *
+ * 【今後の検討事項：データ取得と管理のアプローチ比較】
+ * 以下のアプローチは、アプリケーションの要件や規模に応じて検討が必要です。
+ *
+ * 1. 現在の実装（ハイブリッドアプローチ）
+ *    メリット:
+ *    - 認証状態の永続化が容易（Zustand + persist）
+ *    - ユーザー一覧の最新データを確実に取得（React Query）
+ *    - ページ遷移時のパフォーマンスが良好
+ *
+ *    デメリット:
+ *    - 実装が複雑になる
+ *    - データの一貫性管理が難しい
+ *    - ストアとクエリの同期管理が必要
+ *
+ * 2. ストアのみのアプローチ
+ *    メリット:
+ *    - 実装がシンプル
+ *    - 状態管理が一元化
+ *    - パフォーマンスが安定
+ *
+ *    デメリット:
+ *    - データの鮮度が保証されない
+ *    - サーバーとの同期が難しい
+ *    - リアルタイム性が低い
+ *
+ * 3. クエリのみのアプローチ
+ *    メリット:
+ *    - データの鮮度が保証される
+ *    - キャッシュ戦略が柔軟
+ *    - サーバーとの同期が容易
+ *
+ *    デメリット:
+ *    - 認証状態の永続化が複雑
+ *    - 不要なAPI呼び出しが発生する可能性
+ *    - オフライン対応が難しい
+ *
  * 認証チェックは親の_protectedルートで行われるため、
  * このコンポーネントでは認証済みであることを前提としたUIの表示のみを行う
  */

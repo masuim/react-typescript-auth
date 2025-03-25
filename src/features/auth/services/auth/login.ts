@@ -1,31 +1,8 @@
-/**
- * 認証サービス
- * 認証に関連する外部APIとの通信を担当
- * TanStack Queryと統合されたAPI通信層
- */
-
 import type { User } from "@/features/auth/types";
-import { getCookie, setCookie, removeCookie } from "@/lib/cookie";
-import {
-  mockUsers,
-  getUsersWithoutPasswords,
-} from "@/features/auth/mock/users";
+import { getCookie, setCookie } from "@/lib/cookie";
+import { mockUsers } from "@/features/auth/mock/users";
 
 const AUTH_TOKEN_KEY = "auth_token";
-
-/**
- * すべてのユーザーを取得する関数
- *
- * 注意: これはモック実装です
- * 実際の環境では、APIやデータベースからユーザーリストを取得します
- */
-export const getUsers = async (): Promise<User[]> => {
-  // 遅延をシミュレート
-  await new Promise((resolve) => setTimeout(resolve, 300));
-
-  // パスワードを除外したユーザーリストを返す
-  return getUsersWithoutPasswords();
-};
 
 /**
  * ログイン処理
@@ -70,30 +47,4 @@ export const login = async (email: string, password: string): Promise<User> => {
       reject(new Error("メールアドレスとパスワードは必須です"));
     }
   });
-};
-
-/**
- * ログアウト処理
- */
-export const logout = (): void => {
-  // 実際のAPI呼び出しをここに実装
-  // 例: api.post('/auth/logout');
-
-  removeCookie(AUTH_TOKEN_KEY);
-};
-
-/**
- * 認証状態の確認
- * @param cookieStr サーバーサイドのクッキー文字列（省略可）
- * @returns 認証されていればtrue、そうでなければfalse
- */
-export const isAuthenticated = (cookieStr?: string): boolean => {
-  try {
-    const token = getCookie(AUTH_TOKEN_KEY, cookieStr);
-    const isAuth = !!token;
-    return isAuth;
-  } catch (error) {
-    console.error("認証チェック中にエラーが発生:", error);
-    return false;
-  }
 };
