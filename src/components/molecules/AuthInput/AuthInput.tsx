@@ -6,7 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/atoms/buttons/Button";
 import { Text } from "@/components/atoms/typography";
 import type { UseFormRegister } from "react-hook-form";
-import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
+import { usePasswordVisibility } from "@/features/auth/hooks/usePasswordVisibility";
 import type { FormData } from "@/features/auth/types";
 
 export interface AuthInputProps
