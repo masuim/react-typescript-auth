@@ -1,12 +1,12 @@
 import { forwardRef, type InputHTMLAttributes } from "react";
-import { Input } from "../../atoms/Input/Input";
-import { Label } from "../../atoms/Label/Label";
-import { cn } from "../../../lib/utils";
+import { Input } from "@/components/atoms/Input/Input";
+import { Label } from "@/components/atoms/Label/Label";
+import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
-import { Button } from "../../atoms/LinkAndButton/Button/Button";
-import { Text } from "../../atoms/Typography";
+import { Button } from "@/components/atoms/LinkAndButton/Button/Button";
+import { Text } from "@/components/atoms/Typography";
 import type { UseFormRegister } from "react-hook-form";
-import { usePasswordVisibility } from "../../../hooks/usePasswordVisibility";
+import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
 import type {
   LoginFormData,
   RegisterFormData,

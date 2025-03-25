@@ -1,7 +1,7 @@
-import { Button } from "src/components/atoms/LinkAndButton";
-import { useAuth } from "src/features/auth/hooks/useAuth";
+import { Button } from "@/components/atoms/LinkAndButton";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { removeCookie } from "src/lib/cookie";
+import { removeCookie } from "@/lib/cookie";
 
 interface LogoutButtonProps {
   className?: string;

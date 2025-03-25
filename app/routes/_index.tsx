@@ -1,5 +1,5 @@
-import { InternalLinkButton } from "src/components/atoms/LinkAndButton/InternalLinkButton/InternalLinkButton";
-import { Heading, Text } from "src/components/atoms/Typography";
+import { InternalLinkButton } from "@/components/atoms/LinkAndButton/InternalLinkButton/InternalLinkButton";
+import { Heading, Text } from "@/components/atoms/Typography";
 
 export default function Index() {
   return (

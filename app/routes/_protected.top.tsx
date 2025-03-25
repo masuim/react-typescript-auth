@@ -1,9 +1,9 @@
-import { Heading, Text } from "../../src/components/atoms/Typography";
-import { Card } from "../../src/components/atoms/Card";
-import { useAuthStore } from "../../src/features/auth/store/authStore";
+import { Heading, Text } from "@/components/atoms/Typography";
+import { Card } from "@/components/atoms/Card";
+import { useAuthStore } from "@/features/auth/store/authStore";
 import { useLoaderData } from "react-router-dom";
-import { Button } from "../../src/components/atoms/LinkAndButton";
-import { useAuth } from "../../src/features/auth/hooks/useAuth";
+import { Button } from "@/components/atoms/LinkAndButton";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 /**
  * トップページコンポーネント

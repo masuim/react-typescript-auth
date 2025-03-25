@@ -8,9 +8,9 @@ import {
   useLocation,
 } from "react-router";
 import type { Route } from "./+types/root";
-import { Heading, Text } from "../src/components/atoms/Typography";
-import { InternalLink } from "../src/components/atoms/LinkAndButton";
-import { PageLayout } from "../src/components/templates/PageLayout";
+import { Heading, Text } from "@/components/atoms/Typography";
+import { InternalLink } from "@/components/atoms/LinkAndButton";
+import { PageLayout } from "@/components/templates/PageLayout";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [

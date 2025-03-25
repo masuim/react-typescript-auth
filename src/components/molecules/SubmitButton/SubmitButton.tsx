@@ -15,10 +15,10 @@
  *
  * 注意: 単純なUIアクションの場合は、基本的なButtonコンポーネントを使用してください。
  */
-import { Button } from "../../atoms/LinkAndButton/Button/Button";
-import type { ButtonProps } from "../../atoms/LinkAndButton/Button/Button";
+import { Button } from "@/components/atoms/LinkAndButton/Button/Button";
+import type { ButtonProps } from "@/components/atoms/LinkAndButton/Button/Button";
 import { Loader2 } from "lucide-react";
-import { cn } from "../../../lib/utils";
+import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
 
 export interface SubmitButtonProps extends Omit<ButtonProps, "asChild"> {

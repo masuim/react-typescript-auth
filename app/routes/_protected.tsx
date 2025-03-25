@@ -1,5 +1,5 @@
 import { Outlet, redirect, type LoaderFunctionArgs } from "react-router-dom";
-import { isAuthenticated } from "../../src/features/auth/services/authService";
+import { isAuthenticated } from "@/features/auth/services/authService";
 import { Suspense } from "react";
 
 // ローディング中に表示するコンポーネント

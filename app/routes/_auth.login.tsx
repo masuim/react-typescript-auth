@@ -1,6 +1,6 @@
-import { LoginTemplate } from "../../src/components/templates/LoginTemplate";
+import { LoginTemplate } from "@/components/templates/LoginTemplate";
 import { type LoaderFunctionArgs, redirect } from "react-router-dom";
-import { isAuthenticated } from "../../src/features/auth/services/authService";
+import { isAuthenticated } from "@/features/auth/services/authService";
 
 // 既にログイン済みの場合、/topにリダイレクト
 export async function loader({ request }: LoaderFunctionArgs) {
