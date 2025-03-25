@@ -25,7 +25,7 @@ export const LogoutButton = ({
   const handleLogout = () => {
     logout();
     removeCookie("auth_token");
-    navigate(PATHS.LOGIN);
+    navigate(PATHS.AUTH.LOGIN);
   };
 
   return (

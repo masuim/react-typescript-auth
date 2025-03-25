@@ -1,5 +1,5 @@
 import type { User } from "@/features/auth/types";
-import { getCookie, setCookie } from "@/lib/cookie";
+import { setCookie } from "@/lib/cookie";
 import { mockUsers } from "@/features/auth/mock/users";
 import { PATHS } from "@/features/auth/constants/paths";
 

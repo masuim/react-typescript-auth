@@ -16,7 +16,7 @@ export const useLogoutMutation = () => {
     onSuccess: () => {
       setUser(null);
       setIsAuthenticated(false);
-      navigate(PATHS.LOGIN);
+      navigate(PATHS.AUTH.LOGIN);
     },
   });
 };
