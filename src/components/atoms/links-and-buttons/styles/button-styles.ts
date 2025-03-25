@@ -20,7 +20,6 @@ export const buttonSizeStyles = {
   icon: "h-10 w-10",
 } as const;
 
-// TODO: 型はどこかで使ってる？確認する
 export type ButtonVariant = keyof typeof buttonVariantStyles;
 
 export type ButtonSize = keyof typeof buttonSizeStyles;

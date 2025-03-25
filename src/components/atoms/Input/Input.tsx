@@ -1,3 +1,7 @@
+/**
+ * カスタマイズ可能な入力フィールドコンポーネント
+ * エラー状態の表示、アクセシビリティ対応、フォーカス時のスタイリングを提供します
+ */
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 

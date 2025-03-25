@@ -1,12 +1,8 @@
 interface CardProps {
   children: React.ReactNode;
-  /** カードの幅（Tailwindのクラス名） */
   width?: string;
-  /** カードの高さ（Tailwindのクラス名） */
   height?: string;
-  /** 追加のパディング（Tailwindのクラス名） */
   padding?: string;
-  /** 追加のクラス名 */
   className?: string;
 }
 
