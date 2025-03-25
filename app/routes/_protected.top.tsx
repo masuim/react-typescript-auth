@@ -6,6 +6,8 @@ import { Heading, Text } from "@/components/atoms/Typography";
 import { Card } from "@/components/atoms/Card";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { Button } from "@/components/atoms/LinkAndButton";
+import { Loading } from "@/components/atoms/Loading";
+import { ErrorMessage } from "@/components/atoms/ErrorMessage";
 
 /**
  * トップページコンポーネント
@@ -16,9 +18,7 @@ export default function ProtectedTopPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  // 認証ストアからユーザー情報を取得
   const { user: currentUser } = useAuthStore();
-  // 認証関連の操作を行うフックを使用
   const { logout } = useAuth();
 
   useEffect(() => {
@@ -42,13 +42,9 @@ export default function ProtectedTopPage() {
     fetchUsers();
   }, []);
 
-  if (loading) {
-    return <div>ユーザーデータを読み込み中...</div>;
-  }
+  if (loading) return <Loading />;
 
-  if (error) {
-    return <div className="error-message">{error}</div>;
-  }
+  if (error) return <ErrorMessage message={error} />;
 
   return (
     <Card width="w-full max-w-md mx-auto" padding="p-8" className="shadow-md">
