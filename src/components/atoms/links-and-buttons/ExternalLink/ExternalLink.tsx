@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
-import type { LinkVariant } from "../styles/link-styles";
-import { linkVariants } from "../styles/link-styles";
+import type { LinkVariant } from "@/components/atoms/links-and-buttons/styles/link-styles";
+import { linkVariants } from "@/components/atoms/links-and-buttons/styles/link-styles";
 
 export interface ExternalLinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
