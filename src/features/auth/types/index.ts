@@ -1,19 +1,19 @@
-// 仮の認証ユーザータイプ - APIの仕様に合わせて拡張すること
+/**
+ * 実際の運用に合わせて変更が必要
+ */
 export interface User {
   id: string;
-  email: string;
   name: string;
+  email: string;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface AuthResponse {
-  success: boolean;
-  data?: User;
-  error?: string;
+export interface AuthError {
+  message: string;
+  code?: string;
 }
 
-// フォーム関連の型
 import type {
   LoginFormValues,
   RegisterFormValues,
