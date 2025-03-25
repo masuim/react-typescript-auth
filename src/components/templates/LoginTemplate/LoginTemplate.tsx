@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
 import { AuthForm } from "src/components/organisms/AuthForm/AuthForm";
 import type { AuthenticationFormBase } from "src/features/auth/types";
-import { Heading } from "src/components/atoms/Typography/Heading";
-import { Text } from "src/components/atoms/Typography/Text";
-import { Card } from "src/components/atoms/Card/Card";
+import { Heading, Text } from "src/components/atoms/Typography";
+import { Card } from "src/components/atoms/Card";
 import { useAuth } from "src/features/auth/hooks/useAuth";
-import { LoadingSpinner } from "src/components/atoms/LoadingSpinner/LoadingSpinner";
-import { ErrorMessage } from "src/components/atoms/ErrorMessage/ErrorMessage";
+import { LoadingSpinner } from "src/components/atoms/LoadingSpinner";
+import { ErrorMessage } from "src/components/atoms/ErrorMessage";
 
 interface LoginTemplateProps {
   title: string;

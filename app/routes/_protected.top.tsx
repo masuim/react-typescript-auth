@@ -1,10 +1,9 @@
-import { Heading } from "../../src/components/atoms/Typography/Heading";
-import { Text } from "../../src/components/atoms/Typography/Text";
-import { Card } from "../../src/components/atoms/Card/Card";
+import { Heading, Text } from "../../src/components/atoms/Typography";
+import { Card } from "../../src/components/atoms/Card";
 import { useAuthStore } from "../../src/features/auth/store/authStore";
-import { useNavigate, useLoaderData } from "react-router-dom";
-import { Button } from "../../src/components/atoms/LinkAndButton/Button/Button";
-import { removeCookie } from "src/lib/cookie";
+import { useLoaderData } from "react-router-dom";
+import { Button } from "../../src/components/atoms/LinkAndButton";
+import { useAuth } from "../../src/features/auth/hooks/useAuth";
 
 /**
  * トップページコンポーネント
@@ -13,20 +12,13 @@ import { removeCookie } from "src/lib/cookie";
  */
 export default function TopPage() {
   const user = useAuthStore((state) => state.user);
-  const logout = useAuthStore((state) => state.logout);
-  const navigate = useNavigate();
+  const { logout } = useAuth();
   // 親ルートのローダーからのデータを取得
   const loaderData = useLoaderData();
 
   const userData = user || {
     name: "テストユーザー",
     email: "test@example.com",
-  };
-
-  const handleLogout = () => {
-    logout();
-    removeCookie("auth_token");
-    navigate("/login");
   };
 
   return (
@@ -55,7 +47,7 @@ export default function TopPage() {
       </div>
 
       <div className="mt-6 text-center">
-        <Button variant="destructive" onClick={handleLogout}>
+        <Button variant="destructive" onClick={logout}>
           ログアウト
         </Button>
       </div>

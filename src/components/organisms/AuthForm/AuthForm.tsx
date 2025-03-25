@@ -1,5 +1,5 @@
-import { AuthInput } from "../../molecules/AuthInput/AuthInput";
-import { SubmitButton } from "../../molecules/SubmitButton/SubmitButton";
+import { AuthInput } from "src/components/molecules/AuthInput";
+import { SubmitButton } from "src/components/molecules/SubmitButton";
 import type {
   LoginFormData,
   RegisterFormData,

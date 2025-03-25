@@ -18,6 +18,7 @@
 プロジェクトの詳細なガイドラインは以下のドキュメントを参照してください：
 
 - [コンポーネント構造ガイドライン](./docs/component-structure.md)
+  - [コンポーネントファイル構造パターン](./docs/component-structure.md#ファイル構造と命名パターン)
 - [型定義ガイドライン](./docs/type-definitions.md)
 - [スタイル定義ガイドライン](./docs/styling-guidelines.md)
 - [開発用コマンド集](./docs/development-commands.md)

@@ -1,4 +1,4 @@
-import { LoginTemplate } from "../../src/components/templates/LoginTemplate/LoginTemplate";
+import { LoginTemplate } from "../../src/components/templates/LoginTemplate";
 import { type LoaderFunctionArgs, redirect } from "react-router-dom";
 import { isAuthenticated } from "../../src/features/auth/services/authService";
 
