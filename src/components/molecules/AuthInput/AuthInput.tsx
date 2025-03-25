@@ -10,6 +10,10 @@ import type { UseFormRegister } from "react-hook-form";
 import { usePasswordVisibility } from "@/features/auth/hooks/usePasswordVisibility";
 import type { FormData } from "@/features/auth/types";
 
+/**
+ * 認証フォーム用の入力フィールドコンポーネント
+ * パスワードの表示/非表示切り替え機能とエラー表示機能を提供します
+ */
 export interface AuthInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "name"> {
   label: string;

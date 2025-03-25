@@ -5,6 +5,9 @@ import { removeCookie } from "@/lib/cookie";
 import { PATHS } from "@/features/auth/constants/paths";
 import type { ButtonVariant } from "@/components/atoms/links-and-buttons/styles/button-styles";
 
+/**
+ * ログアウト機能を提供するボタンコンポーネント
+ */
 interface LogoutButtonProps {
   className?: string;
   variant?: ButtonVariant;
