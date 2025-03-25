@@ -6,6 +6,7 @@ import {
   useLogoutMutation,
 } from "@/features/auth/hooks/queries";
 import { handleAuthError } from "@/features/auth/utils";
+import { invalidateAuthQueries } from "@/features/auth/utils/cacheControl";
 /**
  * 認証関連の操作と状態を管理するカスタムフック
  * TanStack Queryを使用して認証操作を最適化
@@ -27,6 +28,8 @@ export const useAuth = () => {
     const authState = isAuthenticated();
     if (authState !== storeIsAuthenticated) {
       setIsAuthenticated(authState);
+      // 認証状態が変更された場合、キャッシュを更新
+      invalidateAuthQueries();
     }
   }, [setIsAuthenticated, storeIsAuthenticated]);
 
