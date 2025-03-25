@@ -1,5 +1,5 @@
-import { cn } from "../../../lib/utils";
-import { theme } from "../../../config/theme";
+import { cn } from "@/lib/utils";
+import { theme } from "@/config/theme";
 import { forwardRef } from "react";
 
 type TextVariant = keyof typeof theme.typography.text;

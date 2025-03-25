@@ -1,12 +1,11 @@
-import { AuthInput } from "../../molecules/AuthInput/AuthInput";
-import { SubmitButton } from "../../molecules/SubmitButton/SubmitButton";
-import type {
-  LoginFormData,
-  RegisterFormData,
-} from "../../../features/auth/types";
+import { AuthInput } from "@/components/molecules/AuthInput";
+import { SubmitButton } from "@/components/molecules/SubmitButton";
 import type { UseFormRegister, FieldErrors } from "react-hook-form";
-
-type FormData = LoginFormData & Partial<RegisterFormData>;
+import type {
+  LoginFormValues,
+  RegisterFormValues,
+} from "@/features/auth/schemas/authSchemas";
+import type { FormData } from "@/features/auth/types";
 
 interface AuthFormProps {
   type: "login" | "register";
@@ -15,12 +14,12 @@ interface AuthFormProps {
   errors: FieldErrors<FormData>;
 }
 
-export const AuthForm: React.FC<AuthFormProps> = ({
+export const AuthForm = ({
   type,
   onSubmit,
   register,
   errors,
-}) => {
+}: AuthFormProps) => {
   return (
     <form onSubmit={onSubmit} className="flex flex-col w-full">
       <div className="flex flex-col gap-8 mb-4">

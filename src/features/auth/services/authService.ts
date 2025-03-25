@@ -4,11 +4,78 @@
  * 将来GraphQLやREST APIの変更があっても、このファイルに変更を集約できる
  */
 
-import type { User } from "src/features/auth/types";
-import Cookies from "universal-cookie";
+import type { User, AuthResponse } from "@/features/auth/types";
+import { getCookie, setCookie, removeCookie } from "@/lib/cookie";
+import { mockUsers, MOCK_PASSWORD } from "@/features/auth/mock/users";
 
-const cookies = new Cookies();
 const AUTH_TOKEN_KEY = "auth_token";
+
+/**
+ * ユーザー認証を行う関数
+ *
+ * 注意: これはモック実装です
+ * 実際の環境では、APIやデータベースを使用して認証を行います
+ * 例: const response = await api.post('/auth/login', { email, password });
+ */
+export const authenticateUser = async (
+  email: string,
+  password: string
+): Promise<AuthResponse> => {
+  // 遅延をシミュレート（リアルなAPI呼び出しのように見せるため）
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  const user = mockUsers.find((user) => user.email === email);
+
+  if (!user || password !== MOCK_PASSWORD) {
+    return {
+      success: false,
+      error: "メールアドレスまたはパスワードが正しくありません",
+    };
+  }
+
+  return { success: true, data: user };
+};
+
+/**
+ * すべてのユーザーを取得する関数
+ *
+ * 注意: これはモック実装です
+ * 実際の環境では、APIやデータベースからユーザーリストを取得します
+ * 例: const response = await api.get('/users');
+ */
+export const getUsers = async (): Promise<User[]> => {
+  // 遅延をシミュレート
+  await new Promise((resolve) => setTimeout(resolve, 300));
+
+  return [...mockUsers]; // 元の配列を変更しないようコピーを返す
+};
+
+/**
+ * IDによるユーザー取得関数
+ *
+ * 注意: これはモック実装です
+ * 実際の環境では、APIやデータベースから特定のユーザー情報を取得します
+ * 例: const response = await api.get(`/users/${id}`);
+ */
+export const getUserById = async (id: string): Promise<User | null> => {
+  // 遅延をシミュレート
+  await new Promise((resolve) => setTimeout(resolve, 200));
+
+  return mockUsers.find((user) => user.id === id) || null;
+};
+
+/**
+ * メールアドレスによるユーザー取得関数
+ *
+ * 注意: これはモック実装です
+ * 実際の環境では、APIやデータベースからユーザー情報を取得します
+ */
+export const getUserByEmail = async (email: string): Promise<User | null> => {
+  // 遅延をシミュレート
+  await new Promise((resolve) => setTimeout(resolve, 200));
+
+  return mockUsers.find((user) => user.email === email) || null;
+};
 
 /**
  * ログイン処理
@@ -33,10 +100,15 @@ export const login = async (email: string, password: string): Promise<User> => {
       setTimeout(() => {
         // ログイン成功時にトークンをCookieに保存
         const token = "dummy_token_" + Date.now();
-        cookies.set(AUTH_TOKEN_KEY, token, {
+
+        // 改善したクッキー関数を使用
+        setCookie(AUTH_TOKEN_KEY, token, {
           path: "/",
           maxAge: 86400, // 1日間有効
-          sameSite: "lax",
+          sameSite: "strict",
+          secure:
+            typeof window !== "undefined" &&
+            window.location.protocol === "https:",
         });
 
         resolve({
@@ -61,15 +133,21 @@ export const logout = (): void => {
   // 例: api.post('/auth/logout');
 
   // Cookieからトークンを削除
-  cookies.remove(AUTH_TOKEN_KEY, { path: "/" });
+  removeCookie(AUTH_TOKEN_KEY);
 };
 
 /**
  * 認証状態の確認
+ * @param cookieStr サーバーサイドのクッキー文字列（省略可）
  * @returns 認証されていればtrue、そうでなければfalse
  */
-export const isAuthenticated = (): boolean => {
-  // Cookieからトークンを取得して確認
-  const token = cookies.get(AUTH_TOKEN_KEY);
-  return !!token;
+export const isAuthenticated = (cookieStr?: string): boolean => {
+  try {
+    const token = getCookie(AUTH_TOKEN_KEY, cookieStr);
+    const isAuth = !!token;
+    return isAuth;
+  } catch (error) {
+    console.error("認証チェック中にエラーが発生:", error);
+    return false;
+  }
 };

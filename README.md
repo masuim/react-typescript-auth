@@ -18,9 +18,11 @@
 プロジェクトの詳細なガイドラインは以下のドキュメントを参照してください：
 
 - [コンポーネント構造ガイドライン](./docs/component-structure.md)
+  - [コンポーネントファイル構造パターン](./docs/component-structure.md#ファイル構造と命名パターン)
 - [型定義ガイドライン](./docs/type-definitions.md)
 - [スタイル定義ガイドライン](./docs/styling-guidelines.md)
 - [開発用コマンド集](./docs/development-commands.md)
+- [インポートパスの規約](./docs/import-paths.md)
 
 ## コーディング規約
 
@@ -31,10 +33,16 @@
 - 通常のコンポーネントは全てアロー関数を使用して定義する
   ```typescript
   // 良い例
-  const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+  const Button = ({ children, ...props }: ButtonProps) => {
     return <button {...props}>{children}</button>;
   };
   ```
+
+### インポートパス
+
+- `src` ディレクトリのファイルは `@/` プレフィックスを使用する
+- `app` ディレクトリのファイルは `~/` プレフィックスを使用する
+- 詳細は [インポートパスの規約](./docs/import-paths.md) を参照
 
 ### ルーティング規約
 

@@ -1,49 +1,79 @@
 import Cookies from "universal-cookie";
+import type { CookieSetOptions } from "universal-cookie";
 
-// 一貫した方法でCookieインスタンスを作成
-// この関数はシングルトンパターンでインスタンスを保持
-let cookiesInstance: Cookies | null = null;
-const getCookiesInstance = () => {
-  if (!cookiesInstance) {
-    if (typeof document === "undefined") {
-      cookiesInstance = new Cookies();
-    } else {
-      cookiesInstance = new Cookies(document.cookie);
-    }
-  }
-  return cookiesInstance;
+// 時間定数
+const ONE_DAY_IN_SECONDS = 60 * 60 * 24; // 60秒 * 60分 * 24時間
+
+/**
+ * 与えられたクッキー文字列またはuniversal-cookiesインスタンスからクッキーを取得する
+ * @param name クッキー名
+ * @param cookieStr クッキー文字列（サーバーサイドのみ）
+ * @returns クッキー値
+ */
+export const getCookie = (
+  name: string,
+  cookieStr?: string
+): string | undefined => {
+  if (isServerSide() && cookieStr)
+    return extractCookieFromString(name, cookieStr);
+
+  return getClientSideCookie(name);
 };
 
-// Cookieの有効期限 (7日)
-const EXPIRES = 7;
+const isServerSide = (): boolean => typeof window === "undefined";
 
-export const setCookie = (name: string, value: any, options = {}) => {
-  const cookies = getCookiesInstance();
+const extractCookieFromString = (
+  name: string,
+  cookieStr: string
+): string | undefined => {
+  const regex = new RegExp(`(?:^|;\\s*)${name}=([^;]*)(?:;|$)`);
+  const match = regex.exec(cookieStr);
 
-  // デフォルトのcookie設定
-  // 注意: これらは開発環境向けの設定です
-  // 本番環境では、セキュリティを高めるために以下を変更してください:
-  // - sameSite: "strict" - クロスサイトリクエストを制限
-  // - httpOnly: true - JavaScriptからのアクセスを防止
-  // - secure: true - HTTPS経由でのみcookieを送信
-  const cookieOptions = {
+  if (!match) return undefined;
+
+  return decodeURIComponent(match[1]);
+};
+
+const getClientSideCookie = (name: string): string | undefined =>
+  new Cookies().get(name);
+
+/**
+ * クッキーを設定する
+ * @param name クッキー名
+ * @param value クッキー値
+ * @param options クッキーオプション
+ */
+export const setCookie = (
+  name: string,
+  value: string,
+  options: CookieSetOptions = {}
+): void => {
+  const cookies = new Cookies();
+
+  const defaultOptions: CookieSetOptions = {
     path: "/",
-    expires: new Date(Date.now() + EXPIRES * 24 * 60 * 60 * 1000),
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax" as const,
-    ...options,
+    maxAge: ONE_DAY_IN_SECONDS, // 1日間
+    sameSite: "strict",
+    secure: isSecureConnection(),
   };
 
-  cookies.set(name, value, cookieOptions);
+  cookies.set(name, value, { ...defaultOptions, ...options });
 };
 
-export const getCookie = (name: string) => {
-  const cookies = getCookiesInstance();
-  const value = cookies.get(name);
-  return value;
-};
+const isSecureConnection = (): boolean =>
+  typeof window !== "undefined" && window.location.protocol === "https:";
 
-export const removeCookie = (name: string) => {
-  const cookies = getCookiesInstance();
-  cookies.remove(name, { path: "/" });
+/**
+ * クッキーを削除する
+ * @param name クッキー名
+ * @param options クッキーオプション
+ */
+export const removeCookie = (
+  name: string,
+  options: CookieSetOptions = {}
+): void => {
+  const cookies = new Cookies();
+  const defaultOptions: CookieSetOptions = { path: "/" };
+
+  cookies.remove(name, { ...defaultOptions, ...options });
 };

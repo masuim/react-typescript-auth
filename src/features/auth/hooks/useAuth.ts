@@ -1,12 +1,12 @@
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "@/features/auth/store/authStore";
 import {
   login as authLogin,
   logout as authLogout,
   isAuthenticated,
-} from "../services/authService";
+} from "@/features/auth/services/authService";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ROUTES } from "../constants/routes";
+import { ROUTES } from "@/features/auth/constants/routes";
 
 // 認証エラー型の定義
 // APIの仕様変更に合わせて拡張可能
@@ -66,10 +66,14 @@ export const useAuth = () => {
       // API変更時はservices/authServiceのみを修正すれば良い
       const user = await authLogin(email, password);
 
+      // 状態更新を先に行い、その後ナビゲーションを実行
       setUser(user);
       setIsAuthenticated(true);
 
-      navigate(ROUTES.TOP);
+      // 少し遅延させてから遷移させることで、状態更新が完了してからの遷移を保証
+      setTimeout(() => {
+        navigate(ROUTES.TOP);
+      }, 100);
 
       return { success: true, data: user };
     } catch (error) {

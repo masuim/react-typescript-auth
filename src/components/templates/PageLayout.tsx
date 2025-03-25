@@ -1,4 +1,4 @@
-import { Card } from "src/components/atoms/Card";
+import { Card } from "@/components/atoms/Card/Card";
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -17,14 +17,14 @@ interface PageLayoutProps {
 /**
  * グレーの背景と白いコンテンツエリアを持つ統一レイアウトコンポーネント
  */
-export const PageLayout: React.FC<PageLayoutProps> = ({
+export const PageLayout = ({
   children,
   centered = false,
   maxWidth = "lg",
   cardPadding = "p-6",
   cardClassName = "",
   className = "",
-}) => {
+}: PageLayoutProps) => {
   // 最大幅の設定
   const maxWidthClasses = {
     sm: "max-w-sm",

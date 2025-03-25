@@ -1,18 +1,17 @@
 import { forwardRef, type InputHTMLAttributes } from "react";
-import { Input } from "../../atoms/Input/Input";
-import { Label } from "../../atoms/Label/Label";
-import { cn } from "../../../lib/utils";
+import { Input } from "@/components/atoms/Input/Input";
+import { Label } from "@/components/atoms/Label/Label";
+import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
-import { Button } from "../../atoms/LinkAndButton/Button/Button";
-import { Text } from "../../atoms/Typography/Text";
+import { Button } from "@/components/atoms/LinkAndButton/Button/Button";
+import { Text } from "@/components/atoms/Typography";
 import type { UseFormRegister } from "react-hook-form";
-import { usePasswordVisibility } from "../../../hooks/usePasswordVisibility";
+import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
 import type {
-  LoginFormData,
-  RegisterFormData,
-} from "../../../features/auth/types";
-
-type FormData = LoginFormData & Partial<RegisterFormData>;
+  LoginFormValues,
+  RegisterFormValues,
+} from "@/features/auth/schemas/authSchemas";
+import type { FormData } from "@/features/auth/types";
 
 export interface AuthInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "name"> {

@@ -1,31 +1,37 @@
 import { useForm } from "react-hook-form";
-import { AuthForm } from "src/components/organisms/AuthForm/AuthForm";
-import type { AuthenticationFormBase } from "src/features/auth/types";
-import { Heading } from "src/components/atoms/Typography/Heading";
-import { Text } from "src/components/atoms/Typography/Text";
-import { Card } from "src/components/atoms/Card";
-import { useAuth } from "src/features/auth/hooks/useAuth";
-import { LoadingSpinner } from "src/components/atoms/LoadingSpinner/LoadingSpinner";
-import { ErrorMessage } from "src/components/atoms/ErrorMessage/ErrorMessage";
+import { AuthForm } from "@/components/organisms/AuthForm/AuthForm";
+import { Heading, Text } from "@/components/atoms/Typography";
+import { Card } from "@/components/atoms/Card";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { LoadingSpinner } from "@/components/atoms/LoadingSpinner";
+import { ErrorMessage } from "@/components/atoms/ErrorMessage";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  loginSchema,
+  type LoginFormValues,
+} from "@/features/auth/schemas/authSchemas";
 
 interface LoginTemplateProps {
   title: string;
   subtitle?: string;
 }
 
-export const LoginTemplate: React.FC<LoginTemplateProps> = ({
-  title,
-  subtitle,
-}) => {
+export const LoginTemplate = ({ title, subtitle }: LoginTemplateProps) => {
   const { login, isLoading, error } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthenticationFormBase>();
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-  const onSubmit = async (data: AuthenticationFormBase) => {
+  const onSubmit = async (data: LoginFormValues) => {
     await login(data.email, data.password);
   };
 
