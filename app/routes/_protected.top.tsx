@@ -1,6 +1,6 @@
 import { Heading } from "../../src/components/atoms/Typography/Heading";
 import { Text } from "../../src/components/atoms/Typography/Text";
-import { Card } from "../../src/components/atoms/Card";
+import { Card } from "../../src/components/atoms/Card/Card";
 import { useAuthStore } from "../../src/features/auth/store/authStore";
 import { useNavigate, useLoaderData } from "react-router-dom";
 import { Button } from "../../src/components/atoms/LinkAndButton/Button/Button";

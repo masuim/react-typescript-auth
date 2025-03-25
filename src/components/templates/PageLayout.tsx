@@ -1,4 +1,4 @@
-import { Card } from "src/components/atoms/Card";
+import { Card } from "src/components/atoms/Card/Card";
 
 interface PageLayoutProps {
   children: React.ReactNode;

@@ -3,7 +3,7 @@ import { AuthForm } from "src/components/organisms/AuthForm/AuthForm";
 import type { AuthenticationFormBase } from "src/features/auth/types";
 import { Heading } from "src/components/atoms/Typography/Heading";
 import { Text } from "src/components/atoms/Typography/Text";
-import { Card } from "src/components/atoms/Card";
+import { Card } from "src/components/atoms/Card/Card";
 import { useAuth } from "src/features/auth/hooks/useAuth";
 import { LoadingSpinner } from "src/components/atoms/LoadingSpinner/LoadingSpinner";
 import { ErrorMessage } from "src/components/atoms/ErrorMessage/ErrorMessage";
