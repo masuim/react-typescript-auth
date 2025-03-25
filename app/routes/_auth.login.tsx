@@ -1,5 +1,5 @@
 import { LoginTemplate } from "@/components/templates/LoginTemplate";
-import { type LoaderFunctionArgs } from "react-router-dom";
+import type { LoaderFunctionArgs } from "react-router-dom";
 import { requireNoAuthentication } from "@/features/auth/utils/authUtils";
 
 // 既にログイン済みの場合、/top にリダイレクト

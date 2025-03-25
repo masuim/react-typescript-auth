@@ -15,8 +15,8 @@
  *
  * 注意: 単純なUIアクションの場合は、基本的なButtonコンポーネントを使用してください。
  */
-import { Button } from "@/components/atoms/LinkAndButton/Button/Button";
-import type { ButtonProps } from "@/components/atoms/LinkAndButton/Button/Button";
+import { Button } from "@/components/atoms/Button";
+import type { ButtonProps } from "@/components/atoms/Button";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";

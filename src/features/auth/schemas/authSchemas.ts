@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { AUTH_VALIDATION_MESSAGES } from "@/constants/validation-messages";
+import { AUTH_VALIDATION_MESSAGES } from "@/features/auth/constants/validation-messages";
 
 const baseAuthSchema = {
   email: z

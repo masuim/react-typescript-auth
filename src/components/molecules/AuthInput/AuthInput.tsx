@@ -1,16 +1,13 @@
-import { forwardRef, type InputHTMLAttributes } from "react";
-import { Input } from "@/components/atoms/Input/Input";
-import { Label } from "@/components/atoms/Label/Label";
+import { forwardRef } from "react";
+import type { InputHTMLAttributes } from "react";
+import { Input } from "@/components/atoms/Input";
+import { Label } from "@/components/atoms/Label";
 import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
-import { Button } from "@/components/atoms/LinkAndButton/Button/Button";
-import { Text } from "@/components/atoms/Typography";
+import { Button } from "@/components/atoms/Button";
+import { Text } from "@/components/atoms/typography";
 import type { UseFormRegister } from "react-hook-form";
-import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
-import type {
-  LoginFormValues,
-  RegisterFormValues,
-} from "@/features/auth/schemas/authSchemas";
+import { usePasswordVisibility } from "@/features/auth/hooks/usePasswordVisibility";
 import type { FormData } from "@/features/auth/types";
 
 export interface AuthInputProps

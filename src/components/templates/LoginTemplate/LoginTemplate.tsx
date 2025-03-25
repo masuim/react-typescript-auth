@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import { AuthForm } from "@/components/organisms/AuthForm/AuthForm";
-import { Heading, Text } from "@/components/atoms/Typography";
+import { AuthForm } from "@/components/organisms/AuthForm";
+import { Heading, Text } from "@/components/atoms/typography";
 import { Card } from "@/components/atoms/Card";
 import { useAuth } from "@/features/auth/hooks/useAuth";
-import { LoadingSpinner } from "@/components/atoms/LoadingSpinner";
+import { LoadingSpinner } from "@/components/atoms/loadings";
 import { ErrorMessage } from "@/components/atoms/ErrorMessage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {

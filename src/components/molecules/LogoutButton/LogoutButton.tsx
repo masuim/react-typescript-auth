@@ -1,4 +1,4 @@
-import { Button } from "@/components/atoms/LinkAndButton";
+import { Button } from "@/components/atoms/Button";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { removeCookie } from "@/lib/cookie";

@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { isAuthenticated } from "@/features/auth/services/authService";
+import { isAuthenticated } from "@/features/auth/services/auth";
 
 /**
  * キャッシュを防ぐためのHTTPヘッダーを提供する関数
