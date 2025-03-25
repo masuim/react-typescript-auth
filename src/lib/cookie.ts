@@ -1,32 +1,41 @@
 import Cookies from "universal-cookie";
 import type { CookieSetOptions } from "universal-cookie";
 
+// 時間定数
+const ONE_DAY_IN_SECONDS = 60 * 60 * 24; // 60秒 * 60分 * 24時間
+
 /**
  * 与えられたクッキー文字列またはuniversal-cookiesインスタンスからクッキーを取得する
  * @param name クッキー名
  * @param cookieStr クッキー文字列（サーバーサイドのみ）
  * @returns クッキー値
  */
-export function getCookie(
+export const getCookie = (
   name: string,
   cookieStr?: string
-): string | undefined {
-  // サーバーサイド: クッキー文字列から値を抽出
-  if (typeof window === "undefined" && cookieStr) {
-    // より厳密な正規表現パターンを使用
-    const regex = new RegExp(`(?:^|;\\s*)${name}=([^;]*)(?:;|$)`);
-    const match = regex.exec(cookieStr);
+): string | undefined => {
+  if (isServerSide() && cookieStr)
+    return extractCookieFromString(name, cookieStr);
 
-    if (match) {
-      return decodeURIComponent(match[1]);
-    }
-    return undefined;
-  } else {
-    // クライアントサイド: universal-cookiesを使用
-    const cookies = new Cookies();
-    return cookies.get(name);
-  }
-}
+  return getClientSideCookie(name);
+};
+
+const isServerSide = (): boolean => typeof window === "undefined";
+
+const extractCookieFromString = (
+  name: string,
+  cookieStr: string
+): string | undefined => {
+  const regex = new RegExp(`(?:^|;\\s*)${name}=([^;]*)(?:;|$)`);
+  const match = regex.exec(cookieStr);
+
+  if (!match) return undefined;
+
+  return decodeURIComponent(match[1]);
+};
+
+const getClientSideCookie = (name: string): string | undefined =>
+  new Cookies().get(name);
 
 /**
  * クッキーを設定する
@@ -34,34 +43,37 @@ export function getCookie(
  * @param value クッキー値
  * @param options クッキーオプション
  */
-export function setCookie(
+export const setCookie = (
   name: string,
   value: string,
   options: CookieSetOptions = {}
-): void {
+): void => {
   const cookies = new Cookies();
+
   const defaultOptions: CookieSetOptions = {
     path: "/",
-    maxAge: 86400, // 1日間
+    maxAge: ONE_DAY_IN_SECONDS, // 1日間
     sameSite: "strict",
-    secure:
-      typeof window !== "undefined" && window.location.protocol === "https:",
+    secure: isSecureConnection(),
   };
 
   cookies.set(name, value, { ...defaultOptions, ...options });
-}
+};
+
+const isSecureConnection = (): boolean =>
+  typeof window !== "undefined" && window.location.protocol === "https:";
 
 /**
  * クッキーを削除する
  * @param name クッキー名
  * @param options クッキーオプション
  */
-export function removeCookie(
+export const removeCookie = (
   name: string,
   options: CookieSetOptions = {}
-): void {
+): void => {
   const cookies = new Cookies();
   const defaultOptions: CookieSetOptions = { path: "/" };
 
   cookies.remove(name, { ...defaultOptions, ...options });
-}
+};
