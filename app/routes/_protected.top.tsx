@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import type { User } from "@/features/auth/types";
 import { getUsers } from "@/features/auth/services/authService";
 import { useAuthStore } from "@/features/auth/store/authStore";
@@ -15,36 +15,24 @@ import { ErrorMessage } from "@/components/atoms/ErrorMessage";
  * このコンポーネントでは認証済みであることを前提としたUIの表示のみを行う
  */
 export default function ProtectedTopPage() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { user: currentUser } = useAuthStore();
   const { logout } = useAuth();
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      setLoading(true);
-      setError(null);
+  const {
+    data: users = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+    staleTime: 5 * 60 * 1000, // 5分間キャッシュ
+    retry: 1,
+  });
 
-      try {
-        // サービス層のgetUsers関数を使用してユーザーデータを取得
-        // 注：現在はモック実装ですが、将来的にはAPIからデータを取得する実装に置き換え可能
-        const userData = await getUsers();
-        setUsers(userData);
-      } catch (err) {
-        console.error("Failed to fetch users:", err);
-        setError("ユーザーデータの取得に失敗しました");
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (isLoading) return <Loading />;
 
-    fetchUsers();
-  }, []);
-
-  if (loading) return <Loading />;
-
-  if (error) return <ErrorMessage message={error} />;
+  if (error)
+    return <ErrorMessage message="ユーザーデータの取得に失敗しました" />;
 
   return (
     <Card width="w-full max-w-md mx-auto" padding="p-8" className="shadow-md">

@@ -5,13 +5,13 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLocation,
 } from "react-router";
 import type { Route } from "./+types/root";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { InternalLink } from "@/components/atoms/LinkAndButton";
 import { PageLayout } from "@/components/templates/PageLayout";
 import "./app.css";
+import { QueryProvider } from "./providers/QueryProvider";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -36,22 +36,23 @@ export default function Root() {
         <Links />
       </head>
       <body
-        className={`h-full bg-page-bg dark:bg-page-bg-dark text-gray-900 dark:text-gray-100 antialiased "
-        }`}
+        className={`h-full bg-page-bg dark:bg-page-bg-dark text-gray-900 dark:text-gray-100 antialiased`}
       >
-        <div className="min-h-screen flex flex-col">
-          <main className="flex-grow">
-            <PageLayout
-              centered={true}
-              maxWidth="lg"
-              className="py-8"
-              cardClassName="shadow-none"
-              cardPadding="p-0"
-            >
-              <Outlet />
-            </PageLayout>
-          </main>
-        </div>
+        <QueryProvider>
+          <div className="min-h-screen flex flex-col">
+            <main className="flex-grow">
+              <PageLayout
+                centered={true}
+                maxWidth="lg"
+                className="py-8"
+                cardClassName="shadow-none"
+                cardPadding="p-0"
+              >
+                <Outlet />
+              </PageLayout>
+            </main>
+          </div>
+        </QueryProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
