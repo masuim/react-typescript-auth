@@ -13,13 +13,10 @@ export interface AuthResponse {
   error?: string;
 }
 
-export interface AuthenticationFormBase {
-  email: string;
-  password: string;
-}
+// フォーム関連の型
+import type {
+  LoginFormValues,
+  RegisterFormValues,
+} from "../schemas/authSchemas";
 
-export interface LoginFormData extends AuthenticationFormBase {}
-
-export interface RegisterFormData extends AuthenticationFormBase {
-  confirmPassword: string;
-}
+export type FormData = LoginFormValues & Partial<RegisterFormValues>;

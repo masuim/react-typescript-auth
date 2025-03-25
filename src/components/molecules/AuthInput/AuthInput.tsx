@@ -7,9 +7,11 @@ import { Button } from "@/components/atoms/LinkAndButton/Button/Button";
 import { Text } from "@/components/atoms/Typography";
 import type { UseFormRegister } from "react-hook-form";
 import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
-import type { LoginFormData, RegisterFormData } from "@/features/auth/types";
-
-type FormData = LoginFormData & Partial<RegisterFormData>;
+import type {
+  LoginFormValues,
+  RegisterFormValues,
+} from "@/features/auth/schemas/authSchemas";
+import type { FormData } from "@/features/auth/types";
 
 export interface AuthInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "name"> {

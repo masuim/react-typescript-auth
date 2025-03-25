@@ -1,20 +1,15 @@
 import { LoginTemplate } from "@/components/templates/LoginTemplate";
 import { type LoaderFunctionArgs, redirect } from "react-router-dom";
-import { useAuthStore } from "@/features/auth/store/authStore";
 import { isAuthenticated } from "@/features/auth/services/authService";
 
 // 既にログイン済みの場合、/topにリダイレクト
 export async function loader({ request }: LoaderFunctionArgs) {
-  // クッキーチェック
   const cookies = request.headers.get("Cookie") || "";
   const hasAuthToken = cookies.includes("auth_token=");
 
-  // クライアントサイドの認証状態を確認
-  // サービス層の関数を使用して認証状態を一貫した方法で確認
   const authenticated = isAuthenticated(cookies);
 
   if (hasAuthToken && authenticated) {
-    console.log("既に認証済み: /topへリダイレクト");
     return redirect("/top");
   }
 

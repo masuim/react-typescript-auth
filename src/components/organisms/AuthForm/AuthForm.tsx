@@ -1,9 +1,11 @@
 import { AuthInput } from "@/components/molecules/AuthInput";
 import { SubmitButton } from "@/components/molecules/SubmitButton";
-import type { LoginFormData, RegisterFormData } from "@/features/auth/types";
 import type { UseFormRegister, FieldErrors } from "react-hook-form";
-
-type FormData = LoginFormData & Partial<RegisterFormData>;
+import type {
+  LoginFormValues,
+  RegisterFormValues,
+} from "@/features/auth/schemas/authSchemas";
+import type { FormData } from "@/features/auth/types";
 
 interface AuthFormProps {
   type: "login" | "register";

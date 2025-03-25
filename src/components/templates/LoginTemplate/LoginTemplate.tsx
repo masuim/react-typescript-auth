@@ -1,11 +1,15 @@
 import { useForm } from "react-hook-form";
 import { AuthForm } from "@/components/organisms/AuthForm/AuthForm";
-import type { AuthenticationFormBase } from "@/features/auth/types";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { Card } from "@/components/atoms/Card";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { LoadingSpinner } from "@/components/atoms/LoadingSpinner";
 import { ErrorMessage } from "@/components/atoms/ErrorMessage";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  loginSchema,
+  type LoginFormValues,
+} from "@/features/auth/schemas/authSchemas";
 
 interface LoginTemplateProps {
   title: string;
@@ -19,9 +23,15 @@ export const LoginTemplate = ({ title, subtitle }: LoginTemplateProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthenticationFormBase>();
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-  const onSubmit = async (data: AuthenticationFormBase) => {
+  const onSubmit = async (data: LoginFormValues) => {
     await login(data.email, data.password);
   };
 
