@@ -2,6 +2,7 @@ import { Button } from "@/components/atoms/Button";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { removeCookie } from "@/lib/cookie";
+import { PATHS } from "@/features/auth/constants/paths";
 
 interface LogoutButtonProps {
   className?: string;
@@ -24,7 +25,7 @@ export const LogoutButton = ({
   const handleLogout = () => {
     logout();
     removeCookie("auth_token");
-    navigate("/login");
+    navigate(PATHS.LOGIN);
   };
 
   return (
