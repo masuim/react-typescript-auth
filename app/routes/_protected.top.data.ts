@@ -1,10 +1,6 @@
 import { isAuthenticated } from "../../src/features/auth/services/authService";
 import { redirect, type LoaderFunctionArgs } from "react-router-dom";
 
-/**
- * データローダー関数
- * React Router FSRでは、.data.tsファイルはルートのデータローダーとして機能します
- */
 export async function loader({ request }: LoaderFunctionArgs) {
   // リクエストからクッキーを取得して認証チェック
   const cookies = request.headers.get("Cookie") || "";
