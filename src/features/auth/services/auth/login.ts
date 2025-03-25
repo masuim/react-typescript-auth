@@ -1,6 +1,7 @@
 import type { User } from "@/features/auth/types";
-import { getCookie, setCookie } from "@/lib/cookie";
+import { setCookie } from "@/lib/cookie";
 import { mockUsers } from "@/features/auth/mock/users";
+import { PATHS } from "@/features/auth/constants/paths";
 
 const AUTH_TOKEN_KEY = "auth_token";
 
@@ -31,7 +32,7 @@ export const login = async (email: string, password: string): Promise<User> => {
         const token = "dummy_token_" + Date.now();
 
         setCookie(AUTH_TOKEN_KEY, token, {
-          path: "/",
+          path: PATHS.ROOT,
           maxAge: 86400, // 1日間有効
           sameSite: "strict",
           secure:

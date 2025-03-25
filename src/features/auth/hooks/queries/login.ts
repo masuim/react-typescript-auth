@@ -24,7 +24,7 @@ export const useLoginMutation = () => {
 
       // 少し遅延させてから遷移させることで、状態更新が完了してからの遷移を保証
       setTimeout(() => {
-        navigate(PATHS.TOP);
+        navigate(PATHS.PROTECTED.TOP);
       }, 100);
     },
   });
