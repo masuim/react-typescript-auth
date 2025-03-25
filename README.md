@@ -22,6 +22,7 @@
 - [型定義ガイドライン](./docs/type-definitions.md)
 - [スタイル定義ガイドライン](./docs/styling-guidelines.md)
 - [開発用コマンド集](./docs/development-commands.md)
+- [インポートパスの規約](./docs/import-paths.md)
 
 ## コーディング規約
 
@@ -36,6 +37,12 @@
     return <button {...props}>{children}</button>;
   };
   ```
+
+### インポートパス
+
+- `src` ディレクトリのファイルは `@/` プレフィックスを使用する
+- `app` ディレクトリのファイルは `~/` プレフィックスを使用する
+- 詳細は [インポートパスの規約](./docs/import-paths.md) を参照
 
 ### ルーティング規約
 

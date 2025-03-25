@@ -1,6 +1,6 @@
-import { cn } from "src/lib/utils";
+import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
-import { theme } from "src/config/theme";
+import { theme } from "@/config/theme";
 
 type LinkVariant = keyof typeof theme.typography.link;
 
