@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
 import { PATHS } from "@/features/auth/constants/paths";
 import { checkAuthentication } from "./checkAuthentication";
-import { getNoCacheHeaders } from "./getNoCacheHeaders";
+import { invalidateAuthQueries } from "./cacheControl";
 
 /**
  * 未認証ユーザー専用ページ用の認証チェック関数
@@ -19,9 +19,8 @@ export const requireNoAuthentication = async (request: Request) => {
   const result = await checkAuthentication(request);
 
   if (result.authenticated) {
-    throw redirect(PATHS.PROTECTED.TOP, {
-      headers: getNoCacheHeaders(),
-    });
+    await invalidateAuthQueries();
+    throw redirect(PATHS.PROTECTED.TOP);
   }
 
   return null;

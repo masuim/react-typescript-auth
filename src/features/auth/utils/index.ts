@@ -1,2 +1,5 @@
 export * from "./error";
-export * from "./authUtils";
+export * from "./checkAuthentication";
+export * from "./requireAuthentication";
+export * from "./requireNoAuthentication";
+export * from "./cacheControl";
