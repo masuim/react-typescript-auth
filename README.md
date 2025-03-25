@@ -69,7 +69,6 @@
   - Zod によるフォームバリデーション
   - エラーハンドリング
   - トークンベースの認証
-  - パスワード表示/非表示切り替え
 - トップページ
   - ログイン状態の維持
   - ユーザー情報の表示
@@ -78,17 +77,11 @@
 ### 状態管理
 
 - ローカルステート: React useState
-- コンテキスト: React Context API
-- フォーム状態: useFormState と useFormStatus
-- 非同期処理: async/await with Server Components
+- フォーム状態: React Hook Form
+- サーバーステート管理: TanStack Query（キャッシュ、再取得、無効化など）
 - 認証状態管理: Zustand
 - トークン管理: Universal Cookie
-- サーバーステート管理: TanStack Query（キャッシュ、再取得、無効化など）
 
 ## ルーティング
 
 @react-router/fs-routes パッケージを用いたファイルシステムルーティング
-
-## 参考情報
-
-- [React Router 公式ドキュメント（日本語）](https://react-router-docs-ja.techtalk.jp/)
