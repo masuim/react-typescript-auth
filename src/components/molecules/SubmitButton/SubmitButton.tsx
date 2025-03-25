@@ -13,7 +13,7 @@
  * - 非同期処理を伴うアクション
  * - APIリクエストの実行ボタン
  *
- * 注意: 単純なUIアクションの場合は、基本的なButtonコンポーネントを使用してください。
+ * 注意: 単純なアクションの場合は、Buttonコンポーネントを使用してください。
  */
 import { Button } from "@/components/atoms/links-and-buttons/Button";
 import type { ButtonProps } from "@/components/atoms/links-and-buttons/Button";
@@ -35,7 +35,7 @@ export const SubmitButton = forwardRef<HTMLButtonElement, SubmitButtonProps>(
       isLoading = false,
       loadingText,
       type = "submit",
-      variant = "primary",
+      variant = "default",
       ...props
     },
     ref

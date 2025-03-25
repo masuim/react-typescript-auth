@@ -11,7 +11,7 @@ export default function Index() {
       <Text variant="large" className="mb-8">
         認証機能を備えたReactテンプレート
       </Text>
-      <InternalLinkButton to={PATHS.AUTH.LOGIN} variant="primary">
+      <InternalLinkButton to={PATHS.AUTH.LOGIN} variant="default">
         ログイン
       </InternalLinkButton>
     </div>
