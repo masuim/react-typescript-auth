@@ -4,10 +4,78 @@
  * 将来GraphQLやREST APIの変更があっても、このファイルに変更を集約できる
  */
 
-import type { User } from "src/features/auth/types";
+import type { User, AuthResponse } from "../types";
 import { getCookie, setCookie, removeCookie } from "src/lib/cookie";
+import { mockUsers, MOCK_PASSWORD } from "../mock/users";
 
 const AUTH_TOKEN_KEY = "auth_token";
+
+/**
+ * ユーザー認証を行う関数
+ *
+ * 注意: これはモック実装です
+ * 実際の環境では、APIやデータベースを使用して認証を行います
+ * 例: const response = await api.post('/auth/login', { email, password });
+ */
+export const authenticateUser = async (
+  email: string,
+  password: string
+): Promise<AuthResponse> => {
+  // 遅延をシミュレート（リアルなAPI呼び出しのように見せるため）
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  const user = mockUsers.find((user) => user.email === email);
+
+  if (!user || password !== MOCK_PASSWORD) {
+    return {
+      success: false,
+      error: "メールアドレスまたはパスワードが正しくありません",
+    };
+  }
+
+  return { success: true, data: user };
+};
+
+/**
+ * すべてのユーザーを取得する関数
+ *
+ * 注意: これはモック実装です
+ * 実際の環境では、APIやデータベースからユーザーリストを取得します
+ * 例: const response = await api.get('/users');
+ */
+export const getUsers = async (): Promise<User[]> => {
+  // 遅延をシミュレート
+  await new Promise((resolve) => setTimeout(resolve, 300));
+
+  return [...mockUsers]; // 元の配列を変更しないようコピーを返す
+};
+
+/**
+ * IDによるユーザー取得関数
+ *
+ * 注意: これはモック実装です
+ * 実際の環境では、APIやデータベースから特定のユーザー情報を取得します
+ * 例: const response = await api.get(`/users/${id}`);
+ */
+export const getUserById = async (id: string): Promise<User | null> => {
+  // 遅延をシミュレート
+  await new Promise((resolve) => setTimeout(resolve, 200));
+
+  return mockUsers.find((user) => user.id === id) || null;
+};
+
+/**
+ * メールアドレスによるユーザー取得関数
+ *
+ * 注意: これはモック実装です
+ * 実際の環境では、APIやデータベースからユーザー情報を取得します
+ */
+export const getUserByEmail = async (email: string): Promise<User | null> => {
+  // 遅延をシミュレート
+  await new Promise((resolve) => setTimeout(resolve, 200));
+
+  return mockUsers.find((user) => user.email === email) || null;
+};
 
 /**
  * ログイン処理

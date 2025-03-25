@@ -1,25 +1,54 @@
+import { useEffect, useState } from "react";
+import type { User } from "../../src/features/auth/types";
+import { getUsers } from "../../src/features/auth/services/authService";
+import { useAuthStore } from "../../src/features/auth/store/authStore";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { Card } from "@/components/atoms/Card";
-import { useAuthStore } from "@/features/auth/store/authStore";
-import { useLoaderData } from "react-router-dom";
-import { Button } from "@/components/atoms/LinkAndButton";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import { Button } from "@/components/atoms/LinkAndButton";
 
 /**
  * トップページコンポーネント
  * 認証チェックは親の_protectedルートで行われるため、
  * このコンポーネントでは認証済みであることを前提としたUIの表示のみを行う
  */
-export default function TopPage() {
-  const user = useAuthStore((state) => state.user);
+export default function ProtectedTopPage() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  // 認証ストアからユーザー情報を取得
+  const { user: currentUser } = useAuthStore();
+  // 認証関連の操作を行うフックを使用
   const { logout } = useAuth();
-  // 親ルートのローダーからのデータを取得
-  const loaderData = useLoaderData();
 
-  const userData = user || {
-    name: "テストユーザー",
-    email: "test@example.com",
-  };
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        // サービス層のgetUsers関数を使用してユーザーデータを取得
+        // 注：現在はモック実装ですが、将来的にはAPIからデータを取得する実装に置き換え可能
+        const userData = await getUsers();
+        setUsers(userData);
+      } catch (err) {
+        console.error("Failed to fetch users:", err);
+        setError("ユーザーデータの取得に失敗しました");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  if (loading) {
+    return <div>ユーザーデータを読み込み中...</div>;
+  }
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
 
   return (
     <Card width="w-full max-w-md mx-auto" padding="p-8" className="shadow-md">
@@ -38,10 +67,10 @@ export default function TopPage() {
         </Heading>
         <div className="space-y-2">
           <Text as="p">
-            <span className="font-medium">名前：</span> {userData.name}
+            <span className="font-medium">名前：</span> {currentUser?.name}
           </Text>
           <Text as="p">
-            <span className="font-medium">メール：</span> {userData.email}
+            <span className="font-medium">メール：</span> {currentUser?.email}
           </Text>
         </div>
       </div>
@@ -50,6 +79,18 @@ export default function TopPage() {
         <Button variant="destructive" onClick={logout}>
           ログアウト
         </Button>
+      </div>
+
+      <div className="mt-6">
+        <h1>ユーザー一覧</h1>
+        <ul className="user-list">
+          {users.map((user) => (
+            <li key={user.id} className="user-list-item">
+              <span className="user-name">{user.name}</span>
+              <span className="user-email">({user.email})</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </Card>
   );
