@@ -66,10 +66,16 @@ export const useAuth = () => {
       // API変更時はservices/authServiceのみを修正すれば良い
       const user = await authLogin(email, password);
 
+      // 状態更新を先に行い、その後ナビゲーションを実行
       setUser(user);
       setIsAuthenticated(true);
 
-      navigate(ROUTES.TOP);
+      // 少し遅延させてから遷移させることで、状態更新が完了してからの遷移を保証
+      setTimeout(() => {
+        // コンソールに遷移を記録
+        console.log("ログイン成功: /topへ遷移します");
+        navigate(ROUTES.TOP);
+      }, 100);
 
       return { success: true, data: user };
     } catch (error) {

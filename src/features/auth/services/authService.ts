@@ -5,9 +5,8 @@
  */
 
 import type { User } from "src/features/auth/types";
-import Cookies from "universal-cookie";
+import { getCookie, setCookie, removeCookie } from "src/lib/cookie";
 
-const cookies = new Cookies();
 const AUTH_TOKEN_KEY = "auth_token";
 
 /**
@@ -33,10 +32,15 @@ export const login = async (email: string, password: string): Promise<User> => {
       setTimeout(() => {
         // ログイン成功時にトークンをCookieに保存
         const token = "dummy_token_" + Date.now();
-        cookies.set(AUTH_TOKEN_KEY, token, {
+
+        // 改善したクッキー関数を使用
+        setCookie(AUTH_TOKEN_KEY, token, {
           path: "/",
           maxAge: 86400, // 1日間有効
-          sameSite: "lax",
+          sameSite: "strict",
+          secure:
+            typeof window !== "undefined" &&
+            window.location.protocol === "https:",
         });
 
         resolve({
@@ -61,15 +65,33 @@ export const logout = (): void => {
   // 例: api.post('/auth/logout');
 
   // Cookieからトークンを削除
-  cookies.remove(AUTH_TOKEN_KEY, { path: "/" });
+  removeCookie(AUTH_TOKEN_KEY);
 };
 
 /**
  * 認証状態の確認
+ * @param cookieStr サーバーサイドのクッキー文字列（省略可）
  * @returns 認証されていればtrue、そうでなければfalse
  */
-export const isAuthenticated = (): boolean => {
-  // Cookieからトークンを取得して確認
-  const token = cookies.get(AUTH_TOKEN_KEY);
-  return !!token;
+export const isAuthenticated = (cookieStr?: string): boolean => {
+  try {
+    // Cookieからトークンを取得して確認
+    const token = getCookie(AUTH_TOKEN_KEY, cookieStr);
+    const isAuth = !!token;
+
+    // デバッグ用
+    console.log(
+      "isAuthenticated check:",
+      isAuth,
+      "token:",
+      token,
+      "cookieStr provided:",
+      !!cookieStr
+    );
+
+    return isAuth;
+  } catch (error) {
+    console.error("認証チェック中にエラーが発生:", error);
+    return false;
+  }
 };

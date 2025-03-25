@@ -2,23 +2,21 @@ import { Heading } from "../../src/components/atoms/Typography/Heading";
 import { Text } from "../../src/components/atoms/Typography/Text";
 import { Card } from "../../src/components/atoms/Card";
 import { useAuthStore } from "../../src/features/auth/store/authStore";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { isAuthenticated } from "../../src/features/auth/services/authService";
+import { useNavigate, useLoaderData } from "react-router-dom";
 import { Button } from "../../src/components/atoms/LinkAndButton/Button/Button";
 import { removeCookie } from "src/lib/cookie";
 
+/**
+ * トップページコンポーネント
+ * 認証チェックは親の_protectedルートで行われるため、
+ * このコンポーネントでは認証済みであることを前提としたUIの表示のみを行う
+ */
 export default function TopPage() {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
-
-  // コンポーネント内でも認証状態をチェック
-  useEffect(() => {
-    if (!isAuthenticated() || !user) {
-      navigate("/login");
-    }
-  }, [navigate, user]);
+  // 親ルートのローダーからのデータを取得
+  const loaderData = useLoaderData();
 
   const userData = user || {
     name: "テストユーザー",
