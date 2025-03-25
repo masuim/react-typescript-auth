@@ -1,6 +1,6 @@
 import { Outlet, redirect, type LoaderFunctionArgs } from "react-router-dom";
-import { isAuthenticated } from "@/features/auth/services/authService";
 import { Suspense } from "react";
+import { requireAuthentication } from "@/features/auth/utils/authUtils";
 
 // ローディング中に表示するコンポーネント
 function LoadingComponent() {
@@ -11,60 +11,10 @@ function LoadingComponent() {
   );
 }
 
-/**
- * 保護されたルート全体の認証チェックを行うローダー
- * 子ルートはこのローダーの結果をそのまま使用できる
- */
-export async function loader({ request }: LoaderFunctionArgs) {
-  // リクエストからクッキーを取得して認証チェック
-  const cookies = request.headers.get("Cookie") || "";
-  const hasAuthToken = cookies.includes("auth_token=");
-
-  // サーバーサイドでの認証チェック
-  if (!hasAuthToken) {
-    // キャッシュを防ぐためのヘッダーを設定
-    return redirect("/login", {
-      headers: {
-        "Cache-Control":
-          "no-store, no-cache, must-revalidate, proxy-revalidate",
-        Pragma: "no-cache",
-        Expires: "0",
-      },
-    });
-  }
-
-  try {
-    // クライアントサイドの認証チェック - クッキー文字列を渡す
-    const authenticated = isAuthenticated(cookies);
-
-    if (!authenticated) {
-      return redirect("/login", {
-        headers: {
-          "Cache-Control":
-            "no-store, no-cache, must-revalidate, proxy-revalidate",
-          Pragma: "no-cache",
-          Expires: "0",
-        },
-      });
-    }
-
-    // 認証が成功した場合、このデータは子ルートで利用可能
-    return {
-      authenticated: true,
-      timestamp: new Date().toISOString(),
-    };
-  } catch (error) {
-    console.error("認証チェック中にエラーが発生", error);
-    return redirect("/login", {
-      headers: {
-        "Cache-Control":
-          "no-store, no-cache, must-revalidate, proxy-revalidate",
-        Pragma: "no-cache",
-        Expires: "0",
-      },
-    });
-  }
-}
+// 未認証の場合、/login にリダイレクト
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  return await requireAuthentication(request);
+};
 
 /**
  * 保護されたルート全体のレイアウト
