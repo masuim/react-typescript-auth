@@ -33,7 +33,7 @@
 - 通常のコンポーネントは全てアロー関数を使用して定義する
   ```typescript
   // 良い例
-  const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+  const Button = ({ children, ...props }: ButtonProps) => {
     return <button {...props}>{children}</button>;
   };
   ```

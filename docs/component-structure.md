@@ -69,7 +69,7 @@ components/
 
 ```typescript
 // Card.tsx - コンポーネントの実装
-export const Card: React.FC<CardProps> = ({ children, ...props }) => {
+export const Card = ({ children, ...props }: CardProps) => {
   // 実装
 };
 

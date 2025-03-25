@@ -14,10 +14,10 @@ interface LogoutButtonProps {
     | "link";
 }
 
-export const LogoutButton: React.FC<LogoutButtonProps> = ({
+export const LogoutButton = ({
   className = "",
   variant = "secondary",
-}) => {
+}: LogoutButtonProps) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
 

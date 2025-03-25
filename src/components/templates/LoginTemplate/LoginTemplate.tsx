@@ -12,10 +12,7 @@ interface LoginTemplateProps {
   subtitle?: string;
 }
 
-export const LoginTemplate: React.FC<LoginTemplateProps> = ({
-  title,
-  subtitle,
-}) => {
+export const LoginTemplate = ({ title, subtitle }: LoginTemplateProps) => {
   const { login, isLoading, error } = useAuth();
 
   const {

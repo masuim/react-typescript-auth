@@ -12,12 +12,12 @@ interface AuthFormProps {
   errors: FieldErrors<FormData>;
 }
 
-export const AuthForm: React.FC<AuthFormProps> = ({
+export const AuthForm = ({
   type,
   onSubmit,
   register,
   errors,
-}) => {
+}: AuthFormProps) => {
   return (
     <form onSubmit={onSubmit} className="flex flex-col w-full">
       <div className="flex flex-col gap-8 mb-4">
