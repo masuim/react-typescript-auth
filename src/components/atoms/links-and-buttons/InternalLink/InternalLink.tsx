@@ -1,10 +1,9 @@
+import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import type { LinkProps } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { typographyStyles } from "@/design-system";
-import { forwardRef } from "react";
-
-type LinkVariant = keyof typeof typographyStyles.link;
+import type { LinkVariant } from "../styles/link-styles";
+import { linkVariants } from "../styles/link-styles";
 
 export interface InternalLinkProps extends Omit<LinkProps, "className"> {
   /**
@@ -28,10 +27,18 @@ export interface InternalLinkProps extends Omit<LinkProps, "className"> {
  */
 export const InternalLink = forwardRef<HTMLAnchorElement, InternalLinkProps>(
   ({ variant = "default", className, children, to, ...props }, ref) => {
-    const linkStyle = typographyStyles.link[variant];
-
     return (
-      <Link to={to} ref={ref} className={cn(linkStyle, className)} {...props}>
+      <Link
+        ref={ref}
+        to={to}
+        className={cn(
+          linkVariants({
+            variant,
+            className,
+          })
+        )}
+        {...props}
+      >
         {children}
       </Link>
     );
