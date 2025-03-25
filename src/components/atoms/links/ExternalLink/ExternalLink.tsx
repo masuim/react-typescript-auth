@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
-import { theme } from "@/config/theme";
+import { typographyStyles } from "@/design-system";
 
-type LinkVariant = keyof typeof theme.typography.link;
+type LinkVariant = keyof typeof typographyStyles.link;
 
 export interface ExternalLinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -46,7 +46,7 @@ export const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>(
     },
     ref
   ) => {
-    const linkStyle = theme.typography.link[variant];
+    const linkStyle = typographyStyles.link[variant];
 
     return (
       <a

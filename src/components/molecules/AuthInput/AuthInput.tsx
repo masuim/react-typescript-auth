@@ -1,4 +1,5 @@
-import { forwardRef, type InputHTMLAttributes } from "react";
+import { forwardRef } from "react";
+import type { InputHTMLAttributes } from "react";
 import { Input } from "@/components/atoms/Input";
 import { Label } from "@/components/atoms/Label";
 import { cn } from "@/lib/utils";

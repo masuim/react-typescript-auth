@@ -16,7 +16,7 @@ import { forwardRef } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { theme } from "@/config/theme";
+import { buttonStyles } from "@/design-system";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -42,15 +42,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 export const buttonVariants = cva(
   [
-    theme.button.base.layout,
-    theme.button.base.appearance,
-    theme.button.base.interaction,
-    theme.button.base.state,
+    buttonStyles.base.layout,
+    buttonStyles.base.appearance,
+    buttonStyles.base.interaction,
+    buttonStyles.base.state,
   ].join(" "),
   {
     variants: {
-      variant: theme.button.variants,
-      size: theme.button.sizes,
+      variant: buttonStyles.variants,
+      size: buttonStyles.sizes,
     },
     defaultVariants: {
       variant: "default",
@@ -59,5 +59,5 @@ export const buttonVariants = cva(
   }
 );
 
-type ButtonVariant = keyof typeof theme.button.variants;
-type ButtonSize = keyof typeof theme.button.sizes;
+type ButtonVariant = keyof typeof buttonStyles.variants;
+type ButtonSize = keyof typeof buttonStyles.sizes;

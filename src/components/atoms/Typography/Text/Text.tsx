@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
-import { theme } from "@/config/theme";
+import { typographyStyles } from "@/design-system";
 import { forwardRef } from "react";
 
-type TextVariant = keyof typeof theme.typography.text;
+type TextVariant = keyof typeof typographyStyles.text;
 
 export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
   /**
@@ -26,7 +26,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
     { variant = "default", as: Component = "p", className, children, ...props },
     ref
   ) => {
-    const textStyle = theme.typography.text[variant];
+    const textStyle = typographyStyles.text[variant];
 
     return (
       <Component ref={ref} className={cn(textStyle, className)} {...props}>

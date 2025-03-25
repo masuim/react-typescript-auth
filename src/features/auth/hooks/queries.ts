@@ -5,7 +5,7 @@ import {
   logout as authLogout,
 } from "@/features/auth/services/authService";
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "@/features/auth/constants/routes";
+import { PATHS } from "@/features/auth/constants/paths";
 import { useAuthStore } from "@/features/auth/store/authStore";
 
 /**
@@ -68,7 +68,7 @@ export const useLoginMutation = () => {
 
       // 少し遅延させてから遷移させることで、状態更新が完了してからの遷移を保証
       setTimeout(() => {
-        navigate(ROUTES.TOP);
+        navigate(PATHS.TOP);
       }, 100);
     },
   });
@@ -86,7 +86,7 @@ export const useLogoutMutation = () => {
     onSuccess: () => {
       setUser(null);
       setIsAuthenticated(false);
-      navigate(ROUTES.LOGIN);
+      navigate(PATHS.LOGIN);
     },
   });
 };
