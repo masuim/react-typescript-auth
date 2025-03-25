@@ -1,6 +1,6 @@
 import { forwardRef, type InputHTMLAttributes } from "react";
-import { Input } from "@/components/atoms/Input/Input";
-import { Label } from "@/components/atoms/Label/Label";
+import { Input } from "@/components/atoms/Input";
+import { Label } from "@/components/atoms/Label";
 import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/atoms/Button";

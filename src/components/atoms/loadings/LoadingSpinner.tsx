@@ -1,6 +1,16 @@
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
+/**
+ * 再利用可能なローディングスピナーコンポーネント
+ *
+ * このコンポーネントは以下のような場所で使用します：
+ * - ボタン内のローディング状態
+ * - フォームの送信中
+ * - 小さなコンテンツの読み込み中
+ *
+ *フルスクリーンのローディングは、Loadingコンポーネントを使用してください。
+ */
 interface LoadingSpinnerProps {
   className?: string;
   size?: "sm" | "default" | "lg";
