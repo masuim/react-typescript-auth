@@ -1,3 +1,8 @@
+/**
+ * 一般的なヘッダーに付随するボタンのコンポーネント
+ * 現在プロジェクト内では利用していない
+ * 必要可否の確認が必要
+ */
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { Button } from "@/components/atoms/links-and-buttons/Button";
 
