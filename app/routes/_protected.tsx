@@ -1,4 +1,5 @@
-import { Outlet, redirect, type LoaderFunctionArgs } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import type { LoaderFunctionArgs } from "react-router-dom";
 import { Suspense } from "react";
 import { requireAuthentication } from "@/features/auth/utils/authUtils";
 import { Loading } from "@/components/atoms/Loading";

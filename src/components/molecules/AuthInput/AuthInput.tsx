@@ -3,7 +3,7 @@ import { Input } from "@/components/atoms/Input/Input";
 import { Label } from "@/components/atoms/Label/Label";
 import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
-import { Button } from "@/components/atoms/buttons/Button";
+import { Button } from "@/components/atoms/Button";
 import { Text } from "@/components/atoms/typography";
 import type { UseFormRegister } from "react-hook-form";
 import { usePasswordVisibility } from "@/features/auth/hooks/usePasswordVisibility";

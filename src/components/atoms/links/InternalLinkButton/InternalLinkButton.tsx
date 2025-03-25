@@ -1,6 +1,6 @@
 import { Link, type LinkProps } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/atoms/buttons/Button";
+import { buttonVariants } from "@/components/atoms/Button";
 import { forwardRef } from "react";
 
 type ButtonVariant =
