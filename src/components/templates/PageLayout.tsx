@@ -2,15 +2,10 @@ import { Card } from "@/components/atoms/Card";
 
 interface PageLayoutProps {
   children: React.ReactNode;
-  /** コンテンツを中央に配置するかどうか */
   centered?: boolean;
-  /** コンテンツの最大幅 */
   maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
-  /** カードのパディング */
   cardPadding?: string;
-  /** カードのクラス名 */
   cardClassName?: string;
-  /** レイアウトのクラス名 */
   className?: string;
 }
 
@@ -25,7 +20,6 @@ export const PageLayout = ({
   cardClassName = "",
   className = "",
 }: PageLayoutProps) => {
-  // 最大幅の設定
   const maxWidthClasses = {
     sm: "max-w-sm",
     md: "max-w-md",
@@ -35,7 +29,6 @@ export const PageLayout = ({
     full: "max-w-full",
   };
 
-  // centeredフラグに基づいて適用するクラスを決定
   const centeredClasses = centered ? "flex items-center justify-center" : "";
 
   return (
