@@ -33,7 +33,7 @@ export const checkAuthentication = async (request: Request) => {
   if (!hasAuthToken) {
     return {
       authenticated: false,
-      redirectTo: PATHS.LOGIN,
+      redirectTo: PATHS.AUTH.LOGIN,
     };
   }
 
@@ -43,7 +43,7 @@ export const checkAuthentication = async (request: Request) => {
     if (!authenticated) {
       return {
         authenticated: false,
-        redirectTo: PATHS.LOGIN,
+        redirectTo: PATHS.AUTH.LOGIN,
       };
     }
 
@@ -58,7 +58,7 @@ export const checkAuthentication = async (request: Request) => {
     console.error("認証チェック中にエラーが発生", error);
     return {
       authenticated: false,
-      redirectTo: PATHS.LOGIN,
+      redirectTo: PATHS.AUTH.LOGIN,
       error,
     };
   }
@@ -80,7 +80,7 @@ export const requireAuthentication = async (request: Request) => {
   const result = await checkAuthentication(request);
 
   if (!result.authenticated) {
-    throw redirect(result.redirectTo || PATHS.LOGIN, {
+    throw redirect(result.redirectTo || PATHS.AUTH.LOGIN, {
       headers: getNoCacheHeaders(),
     });
   }
@@ -104,7 +104,7 @@ export const requireNoAuthentication = async (request: Request) => {
   const result = await checkAuthentication(request);
 
   if (result.authenticated) {
-    throw redirect(PATHS.TOP, {
+    throw redirect(PATHS.PROTECTED.TOP, {
       headers: getNoCacheHeaders(),
     });
   }

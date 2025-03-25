@@ -12,6 +12,7 @@ import { InternalLink } from "@/components/atoms/links/InternalLink";
 import { PageLayout } from "@/components/templates/PageLayout";
 import "./app.css";
 import { QueryProvider } from "@/providers/QueryProvider";
+import { PATHS } from "@/features/auth/constants/paths";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -106,7 +107,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
                       更新する
                     </button>
                     <InternalLink
-                      to="/"
+                      to={PATHS.ROOT}
                       variant="button"
                       className="bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200 hover:bg-indigo-200 dark:hover:bg-indigo-800"
                     >
