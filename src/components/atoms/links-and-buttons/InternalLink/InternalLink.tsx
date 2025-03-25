@@ -6,24 +6,13 @@ import type { LinkVariant } from "../styles/link-styles";
 import { linkVariants } from "../styles/link-styles";
 
 export interface InternalLinkProps extends Omit<LinkProps, "className"> {
-  /**
-   * リンクのバリアント
-   * @default "default"
-   */
   variant?: LinkVariant;
-  /**
-   * リンクのテキストまたは内容
-   */
   children: React.ReactNode;
-  /**
-   * 追加のクラス名
-   */
   className?: string;
 }
 
 /**
  * アプリケーション内の画面遷移に使用するリンクコンポーネント
- * react-router-domのLinkをラップしています
  */
 export const InternalLink = forwardRef<HTMLAnchorElement, InternalLinkProps>(
   ({ variant = "default", className, children, to, ...props }, ref) => {

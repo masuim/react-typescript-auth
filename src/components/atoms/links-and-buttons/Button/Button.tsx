@@ -1,16 +1,9 @@
 /**
- * 基本的なボタンコンポーネント（Atomic Design: Atoms）
+ * 基本的なボタンコンポーネント
  *
- * このコンポーネントは最も基本的なボタンの機能を提供します。
- * - variant: ボタンのスタイルバリエーション（default, destructive, outline, etc.）
- * - size: ボタンのサイズ（sm, default, lg）
- * - asChild: Radix UIのSlot機能を使用して、別のコンポーネントとしてレンダリング可能
- *
- * 使用例:
- * - 単純なアクションボタン（キャンセル、閉じるなど）
- * - カスタムボタンコンポーネントの基礎として
- *
- * 注意: フォーム送信やローディング状態が必要な場合は、SubmitButtonを使用してください。
+ * 注意:
+ * - フォーム送信やローディング状態が必要な場合は、SubmitButtonを使用してください。
+ * - 画面遷移の場合は、コンポーネント名に Link がつくコンポーネントを使用してください。
  */
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";

@@ -19,6 +19,10 @@ export interface InternalLinkButtonProps extends Omit<LinkProps, "className"> {
   className?: string;
 }
 
+/**
+ * アプリケーション内の画面遷移に使用するボタン型スタイルのリンクコンポーネント
+ * ユーザーが直感的に操作できるようにボタンのようなスタイルがついています
+ */
 export const InternalLinkButton = forwardRef<
   HTMLAnchorElement,
   InternalLinkButtonProps
