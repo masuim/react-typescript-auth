@@ -4,9 +4,9 @@
  * 将来GraphQLやREST APIの変更があっても、このファイルに変更を集約できる
  */
 
-import type { User, AuthResponse } from "../types";
-import { getCookie, setCookie, removeCookie } from "src/lib/cookie";
-import { mockUsers, MOCK_PASSWORD } from "../mock/users";
+import type { User, AuthResponse } from "@/features/auth/types";
+import { getCookie, setCookie, removeCookie } from "@/lib/cookie";
+import { mockUsers, MOCK_PASSWORD } from "@/features/auth/mock/users";
 
 const AUTH_TOKEN_KEY = "auth_token";
 

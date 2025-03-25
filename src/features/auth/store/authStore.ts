@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { User, AuthResponse } from "../types";
-import { authenticateUser } from "../services/authService";
+import type { User, AuthResponse } from "@/features/auth/types";
+import { authenticateUser } from "@/features/auth/services/authService";
 
 interface AuthState {
   isAuthenticated: boolean;

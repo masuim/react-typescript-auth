@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type { User } from "../../src/features/auth/types";
-import { getUsers } from "../../src/features/auth/services/authService";
-import { useAuthStore } from "../../src/features/auth/store/authStore";
+import type { User } from "@/features/auth/types";
+import { getUsers } from "@/features/auth/services/authService";
+import { useAuthStore } from "@/features/auth/store/authStore";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { Card } from "@/components/atoms/Card";
 import { useAuth } from "@/features/auth/hooks/useAuth";

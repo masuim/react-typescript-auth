@@ -1,12 +1,12 @@
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "@/features/auth/store/authStore";
 import {
   login as authLogin,
   logout as authLogout,
   isAuthenticated,
-} from "../services/authService";
+} from "@/features/auth/services/authService";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ROUTES } from "../constants/routes";
+import { ROUTES } from "@/features/auth/constants/routes";
 
 // 認証エラー型の定義
 // APIの仕様変更に合わせて拡張可能
