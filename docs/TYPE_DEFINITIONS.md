@@ -8,9 +8,9 @@
 
    - Zod を使用したバリデーションスキーマの定義
    - フォームの入力値の検証ルール
-   - 例：`loginSchema`, `registerSchema`
+     　- 例：`loginSchema`, `registerSchema`
    - スキーマから型を生成する場合は`z.infer`を使用
-   - 例：`type LoginFormValues = z.infer<typeof loginSchema>`
+     　- 例：`type LoginFormValues = z.infer<typeof loginSchema>`
 
 2. **型定義（`types/`）**
    - スキーマ以外のすべての型定義
@@ -137,55 +137,6 @@ src/
   - 例: `AuthError`
 - API 関連: `[UseCase][Request/Response]`
   - 例: `LoginRequest`, `LoginResponse`
-
-## ベストプラクティス
-
-1. **型定義の分類**
-
-   ```typescript
-   // domain.ts - ドメインの型定義
-   export interface User {
-     id: string;
-     name: string;
-     email: string;
-   }
-
-   // api.ts - API関連の型定義
-   export interface LoginRequest {
-     email: string;
-     password: string;
-   }
-   ```
-
-2. **スキーマと型定義の連携**
-
-   ```typescript
-   // authSchemas.ts
-   export const loginSchema = z.object({...});
-   export type LoginFormValues = z.infer<typeof loginSchema>;
-   ```
-
-3. **エクスポート管理**
-
-   ```typescript
-   // types/index.ts
-   export * from "./domain";
-   export * from "./api";
-   ```
-
-4. **型の再利用**
-
-   ```typescript
-   // 共通のプロパティを持つ型の定義
-   interface BaseUser {
-     id: string;
-     email: string;
-   }
-
-   interface AdminUser extends BaseUser {
-     role: "admin";
-   }
-   ```
 
 ## 新しい型定義の追加手順
 
