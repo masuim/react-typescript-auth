@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/features/auth/constants/paths";
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import { login } from "@/features/auth/services/auth";
+import { useError } from "@/hooks/useError";
 
 export const useLoginMutation = () => {
   const navigate = useNavigate();
   const { setUser, setIsAuthenticated } = useAuthStore();
+  const { handleError, clearError } = useError();
 
   return useMutation({
     mutationFn: async ({
@@ -16,6 +18,7 @@ export const useLoginMutation = () => {
       email: string;
       password: string;
     }) => {
+      clearError();
       return await login(email, password);
     },
     onSuccess: (user) => {
@@ -26,6 +29,9 @@ export const useLoginMutation = () => {
       setTimeout(() => {
         navigate(PATHS.PROTECTED.TOP);
       }, 100);
+    },
+    onError: (error) => {
+      handleError(error, "ログイン");
     },
   });
 };

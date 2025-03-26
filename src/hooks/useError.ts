@@ -1,25 +1,29 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 /**
  * エラーハンドリングのためのカスタムフック
- * 既存のErrorMessageコンポーネントと組み合わせて使用します
+ * アプリケーション全体で使用可能な汎用的なエラーハンドリング機能を提供します
  */
 export const useError = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleError = useCallback((error: unknown) => {
+  const handleError = (error: unknown, context?: string) => {
     if (error instanceof Error) {
       setErrorMessage(error.message);
     } else if (typeof error === "string") {
       setErrorMessage(error);
     } else {
-      setErrorMessage("予期せぬエラーが発生しました。");
+      setErrorMessage(
+        context
+          ? `${context}中に予期せぬエラーが発生しました`
+          : "予期せぬエラーが発生しました"
+      );
     }
-  }, []);
+  };
 
-  const clearError = useCallback(() => {
+  const clearError = () => {
     setErrorMessage(null);
-  }, []);
+  };
 
   return {
     errorMessage,

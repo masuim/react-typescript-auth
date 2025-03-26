@@ -5,7 +5,6 @@ import {
   useLoginMutation,
   useLogoutMutation,
 } from "@/features/auth/hooks/queries";
-import { handleAuthError } from "@/features/auth/utils";
 import { invalidateAuthQueries } from "@/features/auth/utils/cacheControl";
 import { useError } from "@/hooks/useError";
 /**
@@ -18,7 +17,7 @@ export const useAuth = () => {
     user,
     setIsAuthenticated,
   } = useAuthStore();
-  const { errorMessage, handleError: setError, clearError } = useError();
+  const { errorMessage, handleError, clearError } = useError();
 
   // ログイン・ログアウトのミューテーションを取得
   const loginMutation = useLoginMutation();
@@ -43,9 +42,8 @@ export const useAuth = () => {
       await loginMutation.mutateAsync({ email, password });
       return { success: true, data: user };
     } catch (error) {
-      const authError = handleAuthError(error);
-      setError(authError.message);
-      return { success: false, error: authError.message };
+      handleError(error, "ログイン");
+      return { success: false, error: errorMessage };
     }
   };
 
