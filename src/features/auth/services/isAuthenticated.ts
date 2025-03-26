@@ -1,4 +1,4 @@
-import { AUTH_TOKEN_KEY } from "@/features/auth/services";
+import { AUTH_TOKEN_KEY } from "@/features/auth/constants/auth-token-key";
 import { getCookie } from "@/lib/cookie";
 
 /**

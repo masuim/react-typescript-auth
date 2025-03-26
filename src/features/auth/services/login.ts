@@ -2,7 +2,7 @@ import type { User } from "@/features/auth/types";
 import { setCookie } from "@/lib/cookie";
 import { mockUsers } from "@/features/users/mock/mockUsers";
 import { PATHS } from "@/features/auth/constants/paths";
-import { AUTH_TOKEN_KEY } from "@/features/auth/services";
+import { AUTH_TOKEN_KEY } from "@/features/auth/constants/auth-token-key";
 
 /**
  * ログイン処理

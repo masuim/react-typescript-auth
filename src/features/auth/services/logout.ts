@@ -1,5 +1,5 @@
 import { removeCookie } from "@/lib/cookie";
-import { AUTH_TOKEN_KEY } from "@/features/auth/services";
+import { AUTH_TOKEN_KEY } from "@/features/auth/constants/auth-token-key";
 
 /**
  * ログアウト処理
