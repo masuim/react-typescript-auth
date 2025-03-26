@@ -1,12 +1,13 @@
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import { isAuthenticated } from "@/features/auth/services/auth";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   useLoginMutation,
   useLogoutMutation,
 } from "@/features/auth/hooks/queries";
 import { handleAuthError } from "@/features/auth/utils";
 import { invalidateAuthQueries } from "@/features/auth/utils/cacheControl";
+import { useError } from "@/hooks/useError";
 /**
  * 認証関連の操作と状態を管理するカスタムフック
  * TanStack Queryを使用して認証操作を最適化
@@ -17,7 +18,7 @@ export const useAuth = () => {
     user,
     setIsAuthenticated,
   } = useAuthStore();
-  const [error, setError] = useState<{ message: string } | null>(null);
+  const { errorMessage, handleError: setError, clearError } = useError();
 
   // ログイン・ログアウトのミューテーションを取得
   const loginMutation = useLoginMutation();
@@ -37,13 +38,13 @@ export const useAuth = () => {
    * ログイン処理
    */
   const login = async (email: string, password: string) => {
-    setError(null);
+    clearError();
     try {
       await loginMutation.mutateAsync({ email, password });
       return { success: true, data: user };
     } catch (error) {
       const authError = handleAuthError(error);
-      setError(authError);
+      setError(authError.message);
       return { success: false, error: authError.message };
     }
   };
@@ -52,7 +53,7 @@ export const useAuth = () => {
    * ログアウト処理
    */
   const logout = () => {
-    setError(null);
+    clearError();
     logoutMutation.mutate();
   };
 
@@ -60,7 +61,7 @@ export const useAuth = () => {
     isAuthenticated: storeIsAuthenticated,
     user,
     isLoading: loginMutation.isPending || logoutMutation.isPending,
-    error,
+    error: errorMessage,
     login,
     logout,
   };
