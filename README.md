@@ -16,7 +16,6 @@
 プロジェクトの詳細なガイドラインは以下のドキュメントを参照してください：
 
 - [コンポーネント構造ガイドライン](./docs/UI_COMPONENT_STRUCTURE.md)
-  - [コンポーネントファイル構造パターン](./docs/UI_COMPONENT_STRUCTURE.md#ファイル構造と命名パターン)
 - [型定義ガイドライン](./docs/TYPE_DEFINITIONS.md)
 - [スタイル定義ガイドライン](./docs/STYLE_GUIDE.md)
 - [開発用コマンド集](./docs/DEVELOPMENT_COMMANDS.md)
@@ -30,7 +29,6 @@
 
 - 通常のコンポーネントは全てアロー関数を使用して定義する
   ```typescript
-  // 良い例
   const Button = ({ children, ...props }: ButtonProps) => {
     return <button {...props}>{children}</button>;
   };
@@ -40,7 +38,7 @@
 
 - `src` ディレクトリのファイルは `@/` プレフィックスを使用する
 - `app` ディレクトリのファイルは `~/` プレフィックスを使用する
-- 詳細は [インポートパスの規約](./docs/IMPORT_PATHS.md) を参照
+  - 詳細は [インポートパスの規約](./docs/IMPORT_PATHS.md) を参照
 
 ### ルーティング規約
 
