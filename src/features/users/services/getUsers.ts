@@ -1,5 +1,5 @@
 import type { User } from "@/features/auth/types";
-import { getUsersWithoutPasswords } from "@/features/auth/mock/users";
+import { getUsersWithoutPasswords } from "@/features/users/mock/mockUsers";
 
 /**
  * すべてのユーザーを取得する関数
