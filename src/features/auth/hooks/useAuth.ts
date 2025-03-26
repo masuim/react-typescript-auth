@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/features/auth/store/useAuthStore";
-import { isAuthenticated } from "@/features/auth/services/auth";
+import { isAuthenticated } from "@/features/auth/services";
 import { useEffect } from "react";
 import {
   useLoginMutation,
