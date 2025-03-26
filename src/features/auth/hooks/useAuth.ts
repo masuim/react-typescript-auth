@@ -19,11 +19,9 @@ export const useAuth = () => {
   } = useAuthStore();
   const { errorMessage, handleError, clearError } = useError();
 
-  // ログイン・ログアウトのミューテーションを取得
   const loginMutation = useLoginMutation();
   const logoutMutation = useLogoutMutation();
 
-  // 認証状態の同期処理
   useEffect(() => {
     const authState = isAuthenticated();
     if (authState !== storeIsAuthenticated) {
@@ -33,9 +31,6 @@ export const useAuth = () => {
     }
   }, [setIsAuthenticated, storeIsAuthenticated]);
 
-  /**
-   * ログイン処理
-   */
   const login = async (email: string, password: string) => {
     clearError();
     try {
@@ -47,9 +42,6 @@ export const useAuth = () => {
     }
   };
 
-  /**
-   * ログアウト処理
-   */
   const logout = () => {
     clearError();
     logoutMutation.mutate();

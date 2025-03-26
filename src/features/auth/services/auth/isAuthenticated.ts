@@ -6,6 +6,7 @@ const AUTH_TOKEN_KEY = "auth_token";
  * 認証状態の確認
  * @param cookieStr サーバーサイドのクッキー文字列（省略可）
  * @returns 認証されていればtrue、そうでなければfalse
+ * @throws {Error} クッキーの取得に失敗した場合
  */
 export const isAuthenticated = (cookieStr?: string): boolean => {
   try {
@@ -13,7 +14,11 @@ export const isAuthenticated = (cookieStr?: string): boolean => {
     const isAuth = !!token;
     return isAuth;
   } catch (error) {
-    console.error("認証チェック中にエラーが発生:", error);
-    return false;
+    const errorMessage =
+      error instanceof Error
+        ? `認証トークンの取得に失敗: ${error.message}`
+        : "認証トークンの取得中に予期せぬエラーが発生";
+    console.error(errorMessage);
+    throw new Error(errorMessage);
   }
 };
