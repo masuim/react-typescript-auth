@@ -1,4 +1,4 @@
-# コンポーネント構造ガイドライン
+# UI コンポーネント構造ガイドライン
 
 ## ディレクトリ構造
 
@@ -6,15 +6,10 @@
 
 ```
 components/
-  ├── atoms/
-  │   ├── Label/           # コンポーネントごとにディレクトリを作成
-  │   │   ├── Label.tsx    # メインコンポーネントファイル
-  │   │   ├── index.tsx    # エクスポートファイル
-  │   │   ├── Label.test.tsx    # テストファイル（オプション）
-  │   │   ├── Label.stories.tsx # Storybookファイル（オプション）
-  │   │   └── styles.ts   # スタイル定義（オプション）
-  │   └── Input/
-  │       └── ...
+  ├── atoms/          # 最小単位のコンポーネント
+  ├── molecules/      # 複数のatomsで構成されるコンポーネント
+  ├── organisms/      # 複数のmoleculesで構成されるコンポーネント
+  └── templates/      # ページレイアウトのテンプレート
 ```
 
 ## Atomic Design パターン
@@ -37,13 +32,8 @@ components/
   - 特定のドメインロジックを含む大きな UI ブロック
 
 - **templates**: ページレイアウトのテンプレート
-
   - 複数の organisms を配置するレイアウト
   - ページの基本構造を定義
-
-- **pages**: ページコンポーネント
-  - 実際のページを表現
-  - URL に紐づくコンポーネント
 
 ## ディレクトリ構造採用の理由
 
@@ -103,8 +93,6 @@ export * from "./Card";
    - React/TypeScript のエコシステムでよく見られる標準的なパターン
    - チーム開発において学習コストが低く、統一された構造を維持できる
 
-この構造により、短期的にはファイル数が増えるものの、長期的なプロジェクトの成長と保守において大きなメリットがあります。
-
 ## ファイル名の命名規則
 
 プロジェクトでは、ファイルの種類に応じて以下の命名規則を採用しています：
@@ -137,24 +125,9 @@ export * from "./Card";
 - コンポーネントに関連するファイルは、コンポーネント名に基づいて命名
 - 例：`Button.styles.ts`, `Button.types.ts`
 
-## 命名規則
+## 新しい UI コンポーネントの追加手順
 
-1. **ディレクトリ名**:
-
-   - パスカルケース（PascalCase）を使用
-   - コンポーネント名と同じ名前を使用
-   - 例: `Button/`, `AuthForm/`
-
-2. **ファイル名**:
-   - メインコンポーネント: `[ComponentName].tsx`
-   - エクスポートファイル: `index.tsx`
-   - テスト: `[ComponentName].test.tsx`
-   - Storybook: `[ComponentName].stories.tsx`
-   - スタイル: `styles.ts`
-
-## 新しいコンポーネントの追加手順
-
-1. コンポーネントの分類を決定（atom, molecule, organism, template, page）
+1. コンポーネントの分類を決定（atom, molecule, organism, template）
 2. 適切なディレクトリを作成
 3. 必要なファイルを作成（index.tsx は必須）
 4. 必要に応じてテスト、Storybook、スタイルファイルを追加

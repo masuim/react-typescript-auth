@@ -80,21 +80,23 @@
 
 ### extends の使用
 
-React の型定義では、`HTMLAttributes`や`ButtonHTMLAttributes`を`extends`で継承することが一般的です：
+`extends`で継承する記載方法を採用しています。
 
 ```typescript
-// 推奨される記法
+// 採用している記法
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
 }
 
-// 非推奨の記法
+// その他の記法
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
   size?: ButtonSize;
 };
 ```
+
+> **注意**: 上記の 2 つの記法は機能的に同等です。チーム内で統一された記法を使用すれば`&`を使用した記法でも問題ありません。
 
 ## ディレクトリ構造
 
@@ -106,11 +108,10 @@ src/
 │   └── [feature-name]/       # 機能ごとのディレクトリ
 │       ├── types/           # 型定義
 │       │   ├── index.ts    # 型定義のエクスポート
-│       │   ├── domain.ts   # ドメインの型定義
-│       │   └── api.ts      # API関連の型定義
+│       │   └── domain.ts   # ドメインの型定義
 │       └── schemas/         # バリデーションスキーマ
-│           └── [feature-name]Schemas.ts  # スキーマと関連する型定義
-└── types/
+│           └── [feature-name]Schemas.ts  # zodで利用するスキーマと関連する型定義
+└── types/             　　　　# 現在利用していませんが、共有の型定義が必要になったらこちらに追加予定です。
     └── shared/             # 共有の型定義
         └── index.ts       # 共有型定義のエクスポート
 ```
@@ -209,8 +210,3 @@ src/
    - 既存の型の再利用を優先
    - 共通の型は適切な場所に抽出
    - 重複する型定義は統合
-
-3. **命名の一貫性**
-   - 各機能内で一貫した命名規則を使用
-   - 明確で理解しやすい名前を選択
-   - 略語は避け、完全な単語を使用
