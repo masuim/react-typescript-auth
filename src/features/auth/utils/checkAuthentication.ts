@@ -1,7 +1,26 @@
 import { isAuthenticated } from "@/features/auth/services/auth";
 import { PATHS } from "@/features/auth/constants/paths";
 
-export const checkAuthentication = async (request: Request) => {
+type AuthenticationResult = {
+  authenticated: boolean;
+  redirectTo?: string;
+  userData?: {
+    timestamp: string;
+  };
+  error?: {
+    message: string;
+    cause?: unknown;
+  };
+};
+
+/**
+ * リクエストの認証状態を確認し、適切な結果を返す
+ * @param request HTTPリクエスト
+ * @returns 認証結果を含むオブジェクト
+ */
+export const checkAuthentication = async (
+  request: Request
+): Promise<AuthenticationResult> => {
   const cookies = request.headers.get("Cookie") || "";
   const hasAuthToken = cookies.includes("auth_token=");
 
@@ -9,6 +28,9 @@ export const checkAuthentication = async (request: Request) => {
     return {
       authenticated: false,
       redirectTo: PATHS.AUTH.LOGIN,
+      error: {
+        message: "認証トークンが見つかりません",
+      },
     };
   }
 
@@ -19,6 +41,9 @@ export const checkAuthentication = async (request: Request) => {
       return {
         authenticated: false,
         redirectTo: PATHS.AUTH.LOGIN,
+        error: {
+          message: "認証トークンが無効です",
+        },
       };
     }
 
@@ -30,11 +55,20 @@ export const checkAuthentication = async (request: Request) => {
       },
     };
   } catch (error) {
-    console.error("認証チェック中にエラーが発生", error);
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "認証チェック中に予期せぬエラーが発生";
+
+    console.error("認証チェックエラー:", errorMessage);
+
     return {
       authenticated: false,
       redirectTo: PATHS.AUTH.LOGIN,
-      error,
+      error: {
+        message: errorMessage,
+        cause: error,
+      },
     };
   }
 };

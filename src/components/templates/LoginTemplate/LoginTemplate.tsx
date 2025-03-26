@@ -47,7 +47,7 @@ export const LoginTemplate = ({ title, subtitle }: LoginTemplateProps) => {
         </Heading>
         {subtitle && <Text variant="subtle">{subtitle}</Text>}
       </div>
-      {error && <ErrorMessage message={error.message} className="mb-4" />}
+      {error && <ErrorMessage message={error} className="mb-4" />}
       <div className="relative">
         <AuthForm
           type="login"
