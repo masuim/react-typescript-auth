@@ -15,7 +15,7 @@
 
 プロジェクトの詳細なガイドラインは以下のドキュメントを参照してください：
 
-- [コンポーネント構造ガイドライン](./docs/UI_COMPONENT_STRUCTURE.md)
+- [UI コンポーネント構造ガイドライン](./docs/UI_COMPONENT_STRUCTURE.md)
 - [型定義ガイドライン](./docs/TYPE_DEFINITIONS.md)
 - [スタイル定義ガイドライン](./docs/STYLE_GUIDE.md)
 - [開発用コマンド集](./docs/DEVELOPMENT_COMMANDS.md)
