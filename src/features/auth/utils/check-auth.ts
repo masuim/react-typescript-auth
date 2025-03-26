@@ -1,4 +1,4 @@
-import { isAuthenticated } from "@/features/auth/services/auth";
+import { isAuthenticated } from "@/features/auth/services";
 import { PATHS } from "@/features/auth/constants/paths";
 
 type AuthenticationResult = {

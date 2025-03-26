@@ -1,6 +1,5 @@
+import { AUTH_TOKEN_KEY } from "@/features/auth/constants/auth-token-key";
 import { getCookie } from "@/lib/cookie";
-
-const AUTH_TOKEN_KEY = "auth_token";
 
 /**
  * 認証状態の確認

@@ -7,11 +7,11 @@ import type { User } from "@/features/auth/types";
  * ユーザー一覧を取得するためのクエリフック
  *
  * 【データ取得と管理の戦略】
- * 詳細は @/features/auth/store/useAuthStore.ts を参照
+ * 詳細は @/features/auth/store/authStore.ts を参照
  *
  * 【関連ファイル】
  * - app/routes/_protected.top.tsx: このクエリフックを使用してユーザー一覧を表示
- * - src/features/auth/store/useAuthStore.ts: 認証状態とユーザー情報の管理
+ * - src/features/auth/store/authStore.ts: 認証状態とユーザー情報の管理
  *
  * 【実装の特徴】
  * - React Queryを使用してユーザー一覧データを取得

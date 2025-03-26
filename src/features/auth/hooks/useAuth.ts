@@ -1,11 +1,11 @@
-import { useAuthStore } from "@/features/auth/store/useAuthStore";
-import { isAuthenticated } from "@/features/auth/services/auth";
+import { authStore } from "@/features/auth/store/authStore";
+import { isAuthenticated } from "@/features/auth/services";
 import { useEffect } from "react";
 import {
   useLoginMutation,
   useLogoutMutation,
 } from "@/features/auth/hooks/queries";
-import { invalidateAuthQueries } from "@/features/auth/utils/cacheControl";
+import { invalidateAuthQueries } from "@/utils/cache/cache-control";
 import { useError } from "@/hooks/useError";
 
 type AuthResult<T = undefined> = {
@@ -23,7 +23,7 @@ export const useAuth = () => {
     isAuthenticated: storeIsAuthenticated,
     user,
     setIsAuthenticated,
-  } = useAuthStore();
+  } = authStore();
   const { errorMessage, handleError, clearError } = useError();
 
   const loginMutation = useLoginMutation();

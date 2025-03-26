@@ -1,6 +1,5 @@
 import { removeCookie } from "@/lib/cookie";
-
-const AUTH_TOKEN_KEY = "auth_token";
+import { AUTH_TOKEN_KEY } from "@/features/auth/constants/auth-token-key";
 
 /**
  * ログアウト処理

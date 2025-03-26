@@ -1,4 +1,3 @@
-export * from "./checkAuthentication";
-export * from "./requireAuthentication";
-export * from "./requireNoAuthentication";
-export * from "./cacheControl";
+export * from "./check-auth";
+export * from "./require-auth";
+export * from "./require-no-auth";
