@@ -5,7 +5,7 @@ import {
   useLoginMutation,
   useLogoutMutation,
 } from "@/features/auth/hooks/queries";
-import { invalidateAuthQueries } from "@/features/auth/utils/cacheControl";
+import { invalidateAuthQueries } from "@/features/auth/utils/cache-control";
 import { useError } from "@/hooks/useError";
 
 type AuthResult<T = undefined> = {

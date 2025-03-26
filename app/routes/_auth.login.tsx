@@ -1,6 +1,6 @@
 import { LoginTemplate } from "@/components/templates/LoginTemplate";
 import type { LoaderFunctionArgs } from "react-router-dom";
-import { requireNoAuthentication } from "@/features/auth/utils/requireNoAuthentication";
+import { requireNoAuthentication } from "@/features/auth/utils/require-no-auth";
 
 // 既にログイン済みの場合、/top にリダイレクト
 export const loader = async ({ request }: LoaderFunctionArgs) => {

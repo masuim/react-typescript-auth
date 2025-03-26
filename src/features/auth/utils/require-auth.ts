@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
 import { PATHS } from "@/features/auth/constants/paths";
-import { checkAuthentication } from "./checkAuthentication";
-import { invalidateAuthQueries } from "./cacheControl";
+import { checkAuthentication } from "./check-auth";
+import { invalidateAuthQueries } from "./cache-control";
 
 /**
  * 保護されたルート用の認証チェック関数
