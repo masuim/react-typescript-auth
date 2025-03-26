@@ -2,7 +2,7 @@ import { useAuthStore } from "@/features/auth/store/useAuthStore";
 import { Heading, Text } from "@/components/atoms/typography";
 import { Card } from "@/components/atoms/Card";
 import { useAuth } from "@/features/auth/hooks/useAuth";
-import { Button } from "@/components/atoms/Button";
+import { Button } from "@/components/atoms/links-and-buttons/Button";
 import { Loading } from "@/components/atoms/loadings";
 import { ErrorMessage } from "@/components/atoms/ErrorMessage";
 import { useUsersQuery } from "@/features/users/hooks/queries/useUsers";

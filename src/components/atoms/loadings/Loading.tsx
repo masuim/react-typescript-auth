@@ -6,7 +6,7 @@
  * - 大きなコンテンツの読み込み中
  * - アプリケーションの初期化中
  *
- * 部分的なローディングは、LoadingSpinnerコンポーネントを使用してください。
+ * - 部分的なローディングは、LoadingSpinnerコンポーネントを使用してください。
  *
  */
 interface LoadingProps {

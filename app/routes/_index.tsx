@@ -1,4 +1,4 @@
-import { InternalLinkButton } from "@/components/atoms/links/InternalLinkButton";
+import { InternalLinkButton } from "@/components/atoms/links-and-buttons/InternalLinkButton/InternalLinkButton";
 import { Heading, Text } from "@/components/atoms/typography";
 import { PATHS } from "@/features/auth/constants/paths";
 

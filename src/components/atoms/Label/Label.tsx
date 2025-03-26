@@ -1,8 +1,18 @@
+/**
+ * フォーム要素のラベルを表示するためのコンポーネント
+ */
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
 
+/**
+ * Labelコンポーネントのプロパティ
+ * @property {LabelVariant} [variant] - ラベルのバリアント
+ * - default: 通常のラベル
+ * - required: 必須項目を示す赤いアスタリスク付き
+ * - optional: 任意項目を示す「(任意)」テキスト付き
+ */
 interface LabelProps
   extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>,
     VariantProps<typeof labelVariants> {

@@ -1,3 +1,7 @@
+/**
+ * エラーメッセージを表示するためのコンポーネント
+ * アイコンとテキストを組み合わせて、エラー状態を視覚的に表現します
+ */
 import { cn } from "@/lib/utils";
 import { AlertCircle } from "lucide-react";
 

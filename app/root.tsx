@@ -8,7 +8,7 @@ import {
 } from "react-router";
 import type { Route } from "./+types/root";
 import { Heading, Text } from "@/components/atoms/typography";
-import { InternalLink } from "@/components/atoms/links/InternalLink";
+import { InternalLink } from "@/components/atoms/links-and-buttons/InternalLink";
 import { PageLayout } from "@/components/templates/PageLayout";
 import "./app.css";
 import { QueryProvider } from "@/providers/QueryProvider";
@@ -108,7 +108,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
                     </button>
                     <InternalLink
                       to={PATHS.ROOT}
-                      variant="button"
+                      variant="default"
                       className="bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200 hover:bg-indigo-200 dark:hover:bg-indigo-800"
                     >
                       ホームに戻る

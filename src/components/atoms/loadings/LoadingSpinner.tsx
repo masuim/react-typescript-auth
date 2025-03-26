@@ -9,7 +9,7 @@ import { Loader2 } from "lucide-react";
  * - フォームの送信中
  * - 小さなコンテンツの読み込み中
  *
- *フルスクリーンのローディングは、Loadingコンポーネントを使用してください。
+ * - フルスクリーンのローディングは、Loadingコンポーネントを使用してください。
  */
 interface LoadingSpinnerProps {
   className?: string;
