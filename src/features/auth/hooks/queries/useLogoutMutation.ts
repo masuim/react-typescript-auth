@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/features/auth/constants/paths";
 import { authStore } from "@/features/auth/store/authStore";
 import { logout } from "@/features/auth/services";
-import { clearAuthCache } from "@/features/auth/utils/cache-control";
+import { clearAuthCache } from "@/utils/cache/cache-control";
 import { useError } from "@/hooks/useError";
 
 export const useLogoutMutation = () => {
