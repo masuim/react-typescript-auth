@@ -47,7 +47,7 @@ interface AuthState {
   setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
 
-export const useAuthStore = create<AuthState>()(
+export const authStore = create<AuthState>()(
   persist(
     (set) => ({
       isAuthenticated: false,

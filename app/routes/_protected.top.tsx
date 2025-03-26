@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/features/auth/store/useAuthStore";
+import { authStore } from "@/features/auth/store/authStore";
 import { Heading, Text } from "@/components/atoms/typography";
 import { Card } from "@/components/atoms/Card";
 import { useAuth } from "@/features/auth/hooks/useAuth";
@@ -15,7 +15,7 @@ import { useUsersQuery } from "@/features/users/hooks/queries/useUsers";
  *
  * 現在の実装:
  * - ユーザー一覧: React Query (useUsersQuery)を使用して取得 - サーバーから最新データを取得
- * - 現在のユーザー: Zustand (useAuthStore)を使用して管理 - ローカルストレージに保存
+ * - 現在のユーザー: Zustand (authStore)を使用して管理 - ローカルストレージに保存
  *
  * 考慮点:
  * 1. データの一貫性:
@@ -42,10 +42,10 @@ import { useUsersQuery } from "@/features/users/hooks/queries/useUsers";
  * トップページコンポーネント
  *
  * 【データ取得と管理の戦略】
- * 詳細は @/features/auth/store/useAuthStore.ts を参照
+ * 詳細は @/features/auth/store/authStore.ts を参照
  *
  * 【関連ファイル】
- * - src/features/auth/store/useAuthStore.ts: 認証状態とユーザー情報の管理
+ * - src/features/auth/store/authStore.ts: 認証状態とユーザー情報の管理
  * - src/features/users/hooks/queries/useUsers.ts: ユーザー一覧データの取得
  *
  * 【実装の特徴】
@@ -93,7 +93,7 @@ import { useUsersQuery } from "@/features/users/hooks/queries/useUsers";
  * このコンポーネントでは認証済みであることを前提としたUIの表示のみを行う
  */
 export default function ProtectedTopPage() {
-  const { user: currentUser } = useAuthStore();
+  const { user: currentUser } = authStore();
   const { logout } = useAuth();
 
   const { data: users = [], isLoading, error } = useUsersQuery();

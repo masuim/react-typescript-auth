@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/features/auth/store/useAuthStore";
+import { authStore } from "@/features/auth/store/authStore";
 import { isAuthenticated } from "@/features/auth/services";
 import { useEffect } from "react";
 import {
@@ -23,7 +23,7 @@ export const useAuth = () => {
     isAuthenticated: storeIsAuthenticated,
     user,
     setIsAuthenticated,
-  } = useAuthStore();
+  } = authStore();
   const { errorMessage, handleError, clearError } = useError();
 
   const loginMutation = useLoginMutation();
