@@ -19,7 +19,8 @@
 
 ＃ 問題点
 
-1. /login から /top 遷移時に画面にちらつきが発生しています
+1. ~~/login から /top 遷移時に画面にちらつきが発生しています~~ (対応済み: https://github.com/masuim/react-typescript-auth/pull/20)
+
 2. セキュリティ対策
    - パスワードの比較が平文で行われています。
    - トークンが単純な文字列生成（"dummy*token*" + Date.now()）で、セキュアではありません
