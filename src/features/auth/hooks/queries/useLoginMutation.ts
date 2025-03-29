@@ -21,14 +21,12 @@ export const useLoginMutation = () => {
       clearError();
       return await login(email, password);
     },
-    onSuccess: (user) => {
+    onSuccess: async (user) => {
       setUser(user);
       setIsAuthenticated(true);
 
-      // 少し遅延させてから遷移させることで、状態更新が完了してからの遷移を保証
-      setTimeout(() => {
-        navigate(PATHS.PROTECTED.TOP);
-      }, 100);
+      await Promise.resolve();
+      navigate(PATHS.PROTECTED.TOP);
     },
     onError: (error) => {
       handleError(error, "ログイン");
