@@ -26,3 +26,4 @@ export const requireAuthentication = async (request: Request) => {
 
   return result.userData;
 };
+

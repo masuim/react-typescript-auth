@@ -125,3 +125,4 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </html>
   );
 }
+

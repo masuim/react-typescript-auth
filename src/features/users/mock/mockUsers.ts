@@ -28,3 +28,4 @@ export const mockUsers: MockUser[] = [
 export const getUsersWithoutPasswords = (): User[] => {
   return mockUsers.map(({ password, ...user }) => user);
 };
+

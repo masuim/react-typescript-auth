@@ -10,3 +10,4 @@ export const logout = (): void => {
 
   removeCookie(AUTH_TOKEN_KEY);
 };
+

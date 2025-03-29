@@ -7,3 +7,4 @@ import type {
 } from "../schemas/authSchemas";
 
 export type FormData = LoginFormValues & Partial<RegisterFormValues>;
+

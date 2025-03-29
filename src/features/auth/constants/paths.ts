@@ -14,3 +14,4 @@ export const PATHS = {
     // SETTINGS: "/settings",
   },
 } as const;
+

@@ -14,3 +14,4 @@ export const getUsers = async (): Promise<User[]> => {
   // パスワードを除外したユーザーリストを返す
   return getUsersWithoutPasswords();
 };
+

@@ -32,3 +32,4 @@ const headingStyles = {
   h5: "scroll-m-20 text-lg font-semibold tracking-tight",
   h6: "scroll-m-20 text-base font-semibold tracking-tight",
 } as const;
+
