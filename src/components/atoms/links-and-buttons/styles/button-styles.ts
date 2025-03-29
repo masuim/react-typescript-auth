@@ -23,3 +23,4 @@ export const buttonSizeStyles = {
 export type ButtonVariant = keyof typeof buttonVariantStyles;
 
 export type ButtonSize = keyof typeof buttonSizeStyles;
+

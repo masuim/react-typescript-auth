@@ -6,6 +6,8 @@ import { Button } from "@/components/atoms/links-and-buttons/Button";
 import { Loading } from "@/components/atoms/loadings";
 import { ErrorMessage } from "@/components/atoms/ErrorMessage";
 import { useUsersQuery } from "@/features/users/hooks/queries/useUsers";
+import { useNavigation } from "react-router-dom";
+import { Suspense } from "react";
 
 /**
  * NOTE: ユーザーデータの取得と管理について
@@ -95,56 +97,64 @@ import { useUsersQuery } from "@/features/users/hooks/queries/useUsers";
 export default function ProtectedTopPage() {
   const { user: currentUser } = authStore();
   const { logout } = useAuth();
+  const navigation = useNavigation();
 
   const { data: users = [], isLoading, error } = useUsersQuery();
 
-  if (isLoading) return <Loading />;
+  const isNavigating = navigation.state === "loading";
+
+  if (isLoading || isNavigating) {
+    return <Loading />;
+  }
 
   if (error)
     return <ErrorMessage message="ユーザーデータの取得に失敗しました" />;
 
   return (
-    <Card width="w-full max-w-md mx-auto" padding="p-8" className="shadow-md">
-      <div className="text-center">
-        <Heading level="h2" className="mb-4">
-          認証済みページ
-        </Heading>
-        <Text variant="default" className="mb-6">
-          このページは認証状態でのみ表示可能です
-        </Text>
-      </div>
-
-      <div className="border-t border-gray-200 pt-4">
-        <Heading level="h3" className="mb-2">
-          ユーザー情報
-        </Heading>
-        <div className="space-y-2">
-          <Text as="p">
-            <span className="font-medium">名前：</span> {currentUser?.name}
-          </Text>
-          <Text as="p">
-            <span className="font-medium">メール：</span> {currentUser?.email}
+    <Suspense fallback={<Loading />}>
+      <Card width="w-full max-w-md mx-auto" padding="p-8" className="shadow-md">
+        <div className="text-center">
+          <Heading level="h2" className="mb-4">
+            認証済みページ
+          </Heading>
+          <Text variant="default" className="mb-6">
+            このページは認証状態でのみ表示可能です
           </Text>
         </div>
-      </div>
 
-      <div className="mt-6 text-center">
-        <Button variant="destructive" onClick={logout}>
-          ログアウト
-        </Button>
-      </div>
+        <div className="border-t border-gray-200 pt-4">
+          <Heading level="h3" className="mb-2">
+            ユーザー情報
+          </Heading>
+          <div className="space-y-2">
+            <Text as="p">
+              <span className="font-medium">名前：</span> {currentUser?.name}
+            </Text>
+            <Text as="p">
+              <span className="font-medium">メール：</span> {currentUser?.email}
+            </Text>
+          </div>
+        </div>
 
-      <div className="mt-6">
-        <h1>ユーザー一覧</h1>
-        <ul className="user-list">
-          {users.map((user) => (
-            <li key={user.id} className="user-list-item">
-              <span className="user-name">{user.name}</span>
-              <span className="user-email">({user.email})</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Card>
+        <div className="mt-6 text-center">
+          <Button variant="destructive" onClick={logout}>
+            ログアウト
+          </Button>
+        </div>
+
+        <div className="mt-6">
+          <h1>ユーザー一覧</h1>
+          <ul className="user-list">
+            {users.map((user) => (
+              <li key={user.id} className="user-list-item">
+                <span className="user-name">{user.name}</span>
+                <span className="user-email">({user.email})</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Card>
+    </Suspense>
   );
 }
+

@@ -12,3 +12,4 @@ export const AUTH_VALIDATION_MESSAGES = {
     match: "パスワードが一致しません",
   },
 };
+

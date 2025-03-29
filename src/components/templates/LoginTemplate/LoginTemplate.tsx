@@ -64,3 +64,4 @@ export const LoginTemplate = ({ title, subtitle }: LoginTemplateProps) => {
     </Card>
   );
 };
+

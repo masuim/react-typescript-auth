@@ -21,3 +21,4 @@ export const isAuthenticated = (cookieStr?: string): boolean => {
     throw new Error(errorMessage);
   }
 };
+

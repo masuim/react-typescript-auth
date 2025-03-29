@@ -22,3 +22,4 @@ export const linkVariants = ({
 }: LinkVariantsProps) => {
   return cn(linkVariantStyles[variant], className);
 };
+

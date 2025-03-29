@@ -78,3 +78,4 @@ export const removeCookie = (
 
   cookies.remove(name, { ...defaultOptions, ...options });
 };
+

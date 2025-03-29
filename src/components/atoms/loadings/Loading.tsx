@@ -22,3 +22,4 @@ export const Loading = ({ className }: LoadingProps) => {
     </div>
   );
 };
+

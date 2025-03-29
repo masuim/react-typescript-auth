@@ -46,3 +46,4 @@ export const clearAuthCache = async () => {
   await queryClient.clear();
   await invalidateAuthQueries();
 };
+
